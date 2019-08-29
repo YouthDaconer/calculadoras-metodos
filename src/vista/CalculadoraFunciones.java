@@ -20,6 +20,7 @@ public class CalculadoraFunciones extends javax.swing.JFrame {
      */
     public CalculadoraFunciones() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     //método que limpiar las cajas de texto de la interfaz
@@ -36,18 +37,18 @@ public class CalculadoraFunciones extends javax.swing.JFrame {
             Funcion ee = new Funcion();
             String posFija = (ee.parsear(txtExpresion.getText()));
             String x = txtValorX.getText();
-            
+
             if (!x.isEmpty() && posFija.contains("x")) {
                 resultado = "" + ee.f(Double.parseDouble(x));
             } else {
                 resultado = "" + ee.f(1);
             }
-            
+
             if (resultado.equals("NaN")) {
-                JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión","Error :(", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión", "Error :(", JOptionPane.ERROR_MESSAGE);
             }
         } catch (ArithmeticException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(),"Error :(", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error :(", JOptionPane.ERROR_MESSAGE);
         }
 
         txtResultado.setText(resultado);
@@ -74,7 +75,8 @@ public class CalculadoraFunciones extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Calculadora de Funciones");
 
         panelEvaluador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -181,41 +183,6 @@ public class CalculadoraFunciones extends javax.swing.JFrame {
         calcular();
     }//GEN-LAST:event_btnCalcularActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CalculadoraFunciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CalculadoraFunciones().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalcular;

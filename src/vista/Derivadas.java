@@ -30,6 +30,7 @@ public class Derivadas extends javax.swing.JFrame {
     public Derivadas() throws ParseException {
         initComponents();
         resultado_field.setEditable(false);
+        this.setLocationRelativeTo(null);
 
         /* Eventos de conversión desde decimal */
         keyListenerDecimal = new KeyListener() {
@@ -172,7 +173,7 @@ public class Derivadas extends javax.swing.JFrame {
         limpiar_btn = new javax.swing.JButton();
         cerrar_btn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Método de Derivación");
 
         jLabel1.setText("Expresión Matemática F(x)");
@@ -312,46 +313,6 @@ public class Derivadas extends javax.swing.JFrame {
         Derivada derivada = new Derivada(expresion);
         Double resultado = derivada.derivacionNumérica(Double.parseDouble(valor_x.getText()), 3);
         resultado_field.setText(resultado.toString());
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Derivadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Derivadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Derivadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Derivadas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Derivadas().setVisible(true);
-                } catch (ParseException ex) {
-                    Logger.getLogger(Derivadas.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

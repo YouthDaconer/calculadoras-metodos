@@ -133,9 +133,9 @@ public class Biseccion {
         return (a + b) / 2;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         
         Biseccion b = new Biseccion("sin(x)", 2, 3, 1e-12);
         System.out.println("raiz = "+ b.biseccion()+"\niteraciones:"+b.getIteraciones());
-    }
+    }*/
 }
