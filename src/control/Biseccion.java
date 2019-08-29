@@ -21,8 +21,8 @@ public class Biseccion {
         this.b = b;
         this.errorTolerado = error;
         iteraciones = 0;
-        this.error=0;
-        maxIteraciones = 200;
+        this.error = 0;
+        maxIteraciones = 400;
         f = new Funcion(expresion);
     }
 
@@ -31,7 +31,7 @@ public class Biseccion {
         this.b = b;
         this.errorTolerado = error;
         this.iteraciones = 0;
-        this.error=0;
+        this.error = 0;
         this.maxIteraciones = maxIteraciones;
         this.f = new Funcion(expresion);
     }
@@ -41,7 +41,7 @@ public class Biseccion {
         this.b = b;
         this.errorTolerado = error;
         this.iteraciones = 0;
-        this.error=0;
+        this.error = 0;
         this.maxIteraciones = maxIteraciones;
         this.f = f;
     }
@@ -90,40 +90,39 @@ public class Biseccion {
     public void setMaxIteraciones(int maxIteraciones) {
         this.maxIteraciones = maxIteraciones;
     }
-    
-    
 
     public double biseccion() {
-        double solucion = Double.NaN;        
-        if (!(f.f(a) * f.f(b) < 0)) {
-            double a1, b1, s1, s2;
-            double fa ,fb, fs;
-            a1 = this.a;
-            b1 = this.b;
+        double solucion = Double.NaN;
+        double a1, b1, s1;
+        double fa, fb, fs;
+        a1 = this.a;
+        b1 = this.b;
+        fa = f.f(a1);
+        fb = f.f(b1);
+        if (fa * fb < 0) {
             int i = 0;
-            do{
+            do {
                 s1 = prom(a1, b1);
                 fa = f.f(a1);
                 fb = f.f(b1);
                 fs = f.f(s1);
-                
+
                 if (fs == 0) {
                     return s1;
                 }
                 if (fa * fs < 0) {
-                    b1 = s1;                    
-                }else{
+                    b1 = s1;
+                } else {
                     a1 = s1;
-                } 
-                s2 = prom(a1, b1);                
+                }
+                s1= prom(a1, b1);
+
+                error = Math.abs(fs);
+
                 i++;
-                error = Math.abs(s1-s2)/s2;
-                
-                fs = f.f(s2);
-                solucion = s2;
-            }while(i <= maxIteraciones && error>=errorTolerado);          
-            
-            iteraciones=i;
+            } while (i <= maxIteraciones && error >= errorTolerado);
+            solucion = s1;
+            iteraciones = i;
         }
 
         return solucion;
