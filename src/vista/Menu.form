@@ -39,7 +39,10 @@
                           <Component id="funciones_btn" pref="198" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="biseccion_btn" pref="196" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="biseccion_btn" pref="196" max="32767" attributes="0"/>
+                          <Component id="regla_falsa_btn" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -70,6 +73,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="derivadas_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
                   <Component id="funciones_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="regla_falsa_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="graficadora_btn" min="-2" pref="68" max="-2" attributes="0"/>
@@ -133,6 +137,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="biseccion_btnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="regla_falsa_btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M&#xe9;todo de regla falsa"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regla_falsa_btnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
