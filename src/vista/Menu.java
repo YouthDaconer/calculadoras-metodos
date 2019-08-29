@@ -37,8 +37,9 @@ public class Menu extends javax.swing.JFrame {
         conversor_btn = new javax.swing.JButton();
         estandar_btn = new javax.swing.JButton();
         derivadas_btn = new javax.swing.JButton();
-        derivadas_btn1 = new javax.swing.JButton();
+        funciones_btn = new javax.swing.JButton();
         graficadora_btn = new javax.swing.JButton();
+        biseccion_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calculadoras de todo tipo");
@@ -67,10 +68,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        derivadas_btn1.setText("Calculadora de funciones");
-        derivadas_btn1.addActionListener(new java.awt.event.ActionListener() {
+        funciones_btn.setText("Calculadora de funciones");
+        funciones_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                derivadas_btn1ActionPerformed(evt);
+                funciones_btnActionPerformed(evt);
             }
         });
 
@@ -81,42 +82,53 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        biseccion_btn.setText("Método de bisección");
+        biseccion_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                biseccion_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(graficadora_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(graficadora_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(derivadas_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(conversor_btn))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(estandar_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(derivadas_btn1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                            .addComponent(derivadas_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(conversor_btn))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(estandar_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(funciones_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addComponent(biseccion_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(147, 147, 147))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(conversor_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(estandar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(conversor_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(estandar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(biseccion_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(derivadas_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(derivadas_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(funciones_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(graficadora_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -144,15 +156,20 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_derivadas_btnActionPerformed
 
-    private void derivadas_btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derivadas_btn1ActionPerformed
+    private void funciones_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funciones_btnActionPerformed
         // TODO add your handling code here:
         new CalculadoraFunciones().setVisible(true);
-    }//GEN-LAST:event_derivadas_btn1ActionPerformed
+    }//GEN-LAST:event_funciones_btnActionPerformed
 
     private void graficadora_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficadora_btnActionPerformed
         // TODO add your handling code here:
         myFrame aplicacion = new myFrame();
     }//GEN-LAST:event_graficadora_btnActionPerformed
+
+    private void biseccion_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biseccion_btnActionPerformed
+        // TODO add your handling code here:
+        new MetodoBiseccion().setVisible(true);
+    }//GEN-LAST:event_biseccion_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,10 +207,11 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton biseccion_btn;
     private javax.swing.JButton conversor_btn;
     private javax.swing.JButton derivadas_btn;
-    private javax.swing.JButton derivadas_btn1;
     private javax.swing.JButton estandar_btn;
+    private javax.swing.JButton funciones_btn;
     private javax.swing.JButton graficadora_btn;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
