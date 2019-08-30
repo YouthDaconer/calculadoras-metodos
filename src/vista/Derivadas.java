@@ -26,6 +26,7 @@ public class Derivadas extends javax.swing.JFrame {
 
     /**
      * Creates new form Derivadas
+     * @throws java.text.ParseException
      */
     public Derivadas() throws ParseException {
         initComponents();
@@ -311,7 +312,7 @@ public class Derivadas extends javax.swing.JFrame {
         }
         String expresion = expresion_math.getText();
         Derivada derivada = new Derivada(expresion);
-        Double resultado = derivada.derivacionNumérica(Double.parseDouble(valor_x.getText()), 3);
+        Double resultado = derivada.derivacionNumericaCentral(Double.parseDouble(valor_x.getText()), 3);
         resultado_field.setText(resultado.toString());
     }
 
