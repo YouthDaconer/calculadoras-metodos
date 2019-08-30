@@ -17,10 +17,11 @@ import java.util.*;
  * arcocoseno acos( ) arcotangente atan( ) arcosecante asec( ) arcocosecante
  * acsc( ) arcocotangente acot( ) seno hiperbólico senh( ) coseno hiperbólico
  * cosh( ) tangente hiperbólica tanh( ) secante hiperbólica sech( ) cosecante
- * hiperbólica csch( ) cotangente hiperbólica coth( ) raices cuadradas sqrt( )
- * arcoseno hiperbólico asenh( ) arcocoseno hiperbólico acosh( ) arcotangente
- * hiperbólica atanh( ) arcosecante hiperbólica asech( ) arcocosecante
- * hiperbólica acsch( ) arcocotangente hiperbólica acoth( ) redondeo round( )
+ * exp() exponencial e^() hiperbólica csch( ) cotangente hiperbólica coth( )
+ * raices cuadradas sqrt( ) arcoseno hiperbólico asenh( ) arcocoseno hiperbólico
+ * acosh( ) arcotangente hiperbólica atanh( ) arcosecante hiperbólica asech( )
+ * arcocosecante hiperbólica acsch( ) arcocotangente hiperbólica acoth( )
+ * redondeo round( )
  *
  * Algunos ejemplos de expresiones válidas son:
  * x+cos(3)*tan(x^(2*pi*x-1))/acos(1/2) cosh(x)+abs(1-x^2)%3
@@ -75,11 +76,11 @@ public class Funcion {
         final String funciones[] = {"1 2 3 4 5 6 7 8 9 0 ( ) x e + - * / ^ %",//1
             "pi",//2
             "ln(",//3
-            "log( abs( sen( sin( cos( tan( sec( csc( cot( sgn(",//4
+            "log( abs( sen( sin( cos( tan( sec( csc( cot( sgn( exp(",//4
             "rnd() asen( asin( acos( atan( asec( acsc( acot( senh( sinh( cosh( tanh( sech( csch( coth( sqrt(",//5
             "round( asenh( acosh( atanh( asech( acsch( acoth("};//6
         //Todas las funciones que trabajan como paréntesis de apertura están aquí.
-        final String parentesis = "( ln log abs sen sin cos tan sec csc cot sgn asen asin"
+        final String parentesis = "( ln log abs sen sin cos tan sec csc cot sgn exp asen asin"
                 + " acos atan asec acsc acot senh sinh cosh tanh sech csch"
                 + " coth sqrt round asenh asinh acosh atanh asech acsch acoth";
         /*
@@ -105,7 +106,16 @@ public class Funcion {
                 cont = 1;
                 while (tamano == 0 && cont <= 6) { //Este while revisa si el pedazo del texto sacado concuerda con algo conocido
                     if (pos + cont <= expr.length() && funciones[cont - 1].contains(expr.substring(pos, pos + cont))) {
-                        tamano = cont;
+                        if (expr.charAt(pos)=='e' && expr.length() > pos+4) {
+                            if (expr.substring(pos, pos+4).contains("exp")) {
+                                tamano = 4;
+                            }else{
+                                tamano = cont;
+                            }
+                        }else{
+                            tamano = cont;
+                        }
+                        
                     }
                     cont++;
                 }
@@ -134,6 +144,7 @@ public class Funcion {
                         anterior = 1;
                         pos--;
                     } else if (expr.charAt(pos) == 'x' || expr.charAt(pos) == 'e') { //Si es un número conocido
+
                         if (anterior == 1 || anterior == 4) {//si hay una multiplicación oculta
                             sacaOperadores(PilaNumeros, PilaOperadores, "*");
                         }
@@ -336,6 +347,11 @@ public class Funcion {
                         //Valor absoluto
                         a = ((Double) pilaEvaluar.pop());
                         pilaEvaluar.push(Math.abs(a));
+                        break;
+                    case "exp":
+                        //Exponencial = e^()
+                        a = ((Double) pilaEvaluar.pop());
+                        pilaEvaluar.push(Math.exp(a));
                         break;
                     case "rnd":
                         //Un número a random simplemente se mete en la pila de números
