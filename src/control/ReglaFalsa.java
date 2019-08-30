@@ -107,7 +107,7 @@ public class ReglaFalsa {
             if (Math.abs(xp / x3 - 1) < err) {
                 cadena += (round(Math.abs(xp / x3 - 1), numDec) + "<" + round(err, numDec) + " -> termina programa" + "\n");
                 iteraciones = i;
-                return "Iteración:" + i + " Valor x=" + String.valueOf(x3);
+                return String.valueOf(x3);
             }
 
             y3 = f.f(x3);
