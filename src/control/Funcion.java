@@ -106,16 +106,16 @@ public class Funcion {
                 cont = 1;
                 while (tamano == 0 && cont <= 6) { //Este while revisa si el pedazo del texto sacado concuerda con algo conocido
                     if (pos + cont <= expr.length() && funciones[cont - 1].contains(expr.substring(pos, pos + cont))) {
-                        if (expr.charAt(pos)=='e' && expr.length() > pos+4) {
-                            if (expr.substring(pos, pos+4).contains("exp")) {
+                        if (expr.charAt(pos) == 'e' && expr.length() > pos + 4) {
+                            if (expr.substring(pos, pos + 4).contains("exp")) {
                                 tamano = 4;
-                            }else{
+                            } else {
                                 tamano = cont;
                             }
-                        }else{
+                        } else {
                             tamano = cont;
                         }
-                        
+
                     }
                     cont++;
                 }
@@ -644,11 +644,18 @@ public class Funcion {
     }
     //--------------------------------------------
 
-    //Método que redondea el un cadena double 
+    //Método que redondea una cadena double 
     public Double redondeo(String resultado, int redondeo) {
-        BigDecimal bd = new BigDecimal(resultado);
-        bd = bd.setScale(redondeo, BigDecimal.ROUND_HALF_UP);
-        return bd.doubleValue();
+        Double num = Double.parseDouble(resultado);
+        try {
+            BigDecimal bd = new BigDecimal(resultado);
+            bd = bd.setScale(redondeo, BigDecimal.ROUND_HALF_UP);
+            num = bd.doubleValue();
+        } catch (Exception e) {
+            return num;
+        }
+
+        return num;
     }
     //------------------------
 

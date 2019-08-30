@@ -5,6 +5,8 @@
  */
 package control;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author salas
@@ -15,8 +17,10 @@ public class NewtonRaphson {
     private Funcion f;
     private Derivada d;
     private double xInicial, errorTol, error;
-    private final double MAX_ITERACIONES = 200;
+    private final int MAX_ITERACIONES = 200;
     private double iteraciones;
+    private Object[] encabezados = {"Iteración", "Xn-1", "Xn", "error",};
+    private ArrayList<Object[]> datos;
     //-----------------------
 
     //Constructores
@@ -26,6 +30,7 @@ public class NewtonRaphson {
         this.errorTol = 1e-10;
         this.iteraciones = 0;
         this.error = 0;
+        this.datos = new ArrayList<>();
     }
 
     public NewtonRaphson(String funcion) {
@@ -34,6 +39,7 @@ public class NewtonRaphson {
         this.iteraciones = 0;
         this.error = 0;
         this.errorTol = 1e-10;
+        this.datos = new ArrayList<>();
     }
 
     public NewtonRaphson(String funcion, double error) {
@@ -42,6 +48,7 @@ public class NewtonRaphson {
         this.iteraciones = 0;
         this.error = 0;
         this.errorTol = error;
+        this.datos = new ArrayList<>();
     }
 
     public NewtonRaphson(Funcion funcion, double error) {
@@ -50,6 +57,7 @@ public class NewtonRaphson {
         this.error = 0;
         this.iteraciones = 0;
         this.errorTol = error;
+        this.datos = new ArrayList<>();
     }
     //--------------------------
 
@@ -77,33 +85,63 @@ public class NewtonRaphson {
     public double getError() {
         return error;
     }
+
+    public Object[] getEncabezados() {
+        return encabezados;
+    }
+
+    public ArrayList<Object[]> getDatos() {
+        return datos;
+    }
     //------------------------------
 
+    //Método que calcula la raiz de la expresión por medio de Newton Raphson
     public double resolver(double x) {
         double xr = Double.NaN;
+        
         try {
 
-            double m = d.derivacionNumericaCentral(x, 8);
+            double m = d.derivacionNumericaClasica(x, 20);
             double y0 = f.f(x);
             double x0 = x;
 
             int i = 0;
+            String linea = "";//string que contendra la fila de valores
+            Object[] fila;//recolectará los resultados de las variables
             do {
                 xr = x0 - (y0 / m);
-                error = Math.abs(xr - x0) / Math.abs(xr);
-
-                if (error >= errorTol) {
-                    x0 = xr;
-                    y0 = f.f(x0);
-                    m = d.derivacionNumericaCentral(x0, 8);
-                }
+                error = Math.abs(xr - x0) / Math.abs(xr);//Cálculo el error
                 i++;
-            } while (i <= MAX_ITERACIONES && error >= errorTol);
+                linea = i + "," + x0 + "," + xr + "," + error;//le doy formato a la fila
+                fila = linea.split(",");//separo los valores y los fuardo en fila
+                datos.add(fila);//Adiciona a la lista de datos
+
+                //Cambio los valores para la siguiente iteración
+                x0 = xr;
+                y0 = f.f(x0);
+                m = d.derivacionNumericaClasica(x0, 20);
+                
+            } while (i < MAX_ITERACIONES && error >= errorTol);
+            iteraciones = i;//cantidad de iteraciones totales            
         } catch (ArithmeticException e) {
-            throw new ArithmeticException("Error no se pudo calcular la solución :(\n"+ e.getMessage());
+            throw new ArithmeticException("Error no se pudo calcular la solución :(\n" + e.getMessage());
         }
 
-        return xr;
+        return xr;//Raiz calculada
     }
-
+    //------------------------------------------
+    
+    //    //pruebas    
+    public static void main(String[] args) {
+        NewtonRaphson n = new NewtonRaphson("cos(x)-x^3");
+        System.out.println(n.resolver(0.5));
+        System.out.println("Proceso:");
+        n.getDatos().forEach((fila) -> {
+            for (Object dato : fila) {
+                System.out.print(dato + "\t");
+            }
+            System.out.print("\n");
+        });
+    }
+//    //-------------------------------------
 }

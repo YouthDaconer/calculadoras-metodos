@@ -13,7 +13,7 @@ public class Derivada {
 
     //Atributos de clase
     private Funcion f;
-    private final double h;
+    private double h;
     //---------------------
 
     //constructor
@@ -29,16 +29,12 @@ public class Derivada {
         this.h = 1e-10;//Asigno un valor aproximado a cero        
     }
     //------------------------------
-    
-    
 
     //cambia la expresion de la funcion
     public void addFuncion(String expresion) {
         this.f = new Funcion(expresion);
     }
     //----------------------------------
-    
-    
 
     /*
     *método que calcula la derivada de la función en el punto x
@@ -49,14 +45,14 @@ public class Derivada {
         Double resultado = Double.NaN;// no un valor numerico
         try {
             resultado = ((f.f(x + h) - f.f(x)) / h);//formula de derivación numérica
-            resultado = f.redondeo(Double.toString(resultado),cifras);//redondeo a 5 cifras
+            resultado = f.redondeo(Double.toString(resultado), cifras);//redondeo a 5 cifras
         } catch (ArithmeticException e) {
             throw new ArithmeticException("No se pudo evaluar la derivada en el punto " + x);// en caso de que no se pueda hallar la derivada
         }
         return resultado;
     }
     //---------------------------------------
-    
+
     /*
     *método que calcula la derivada central de la función en el punto x
     *por medio del método de derivación numerica central
@@ -64,16 +60,17 @@ public class Derivada {
     public Double derivacionNumericaCentral(double x, int cifras) {
 
         Double resultado = Double.NaN;// no un valor numerico
+        h = 0.025;
         try {
-            resultado = ((f.f(x + h) - f.f(x-h)) / 2*h);//formula de derivación numérica
-            resultado = f.redondeo(Double.toString(resultado),cifras);//redondeo a 5 cifras
+            resultado = ((f.f(x + h) - f.f(x - h)) / 2 * h);//formula de derivación numérica
+            resultado = f.redondeo(Double.toString(resultado), cifras);//redondeo a 5 cifras
         } catch (ArithmeticException e) {
             throw new ArithmeticException("No se pudo evaluar la derivada en el punto " + x);// en caso de que no se pueda hallar la derivada
         }
         return resultado;
     }
     //---------------------------------------
-    
+
     /*
     *método que calcula la derivada central de la función en el punto x
     *por medio del método de derivación numerica central
@@ -81,9 +78,10 @@ public class Derivada {
     public Double segundaDerivadaCentral(double x, int cifras) {
 
         Double resultado = Double.NaN;// no un valor numerico
+        h = 0.025;
         try {
-            resultado = ((f.f(x + h) -(2*f.f(x)) + f.f(x-h)) / Math.pow(h, 2));//formula de derivación numérica
-            resultado = f.redondeo(Double.toString(resultado),cifras);//redondeo a 5 cifras
+            resultado = ((f.f(x + h) - (2 * f.f(x)) + f.f(x - h)) / Math.pow(h, 2));//formula de derivación numérica
+            resultado = f.redondeo(Double.toString(resultado), cifras);//redondeo a 5 cifras
         } catch (ArithmeticException e) {
             throw new ArithmeticException("No se pudo evaluar la derivada en el punto " + x);// en caso de que no se pueda hallar la derivada
         }

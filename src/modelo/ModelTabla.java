@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,9 +14,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ModelTabla {
     
-    public DefaultTableModel getModeloTabla(Object [] encabezados, Object[][] data){
-        DefaultTableModel dt = new DefaultTableModel();
+    //Método que devuelve un modelo de tabla
+    public DefaultTableModel getModeloTabla(Object [] encabezados, ArrayList<Object[]> datos){
+        DefaultTableModel dt = new DefaultTableModel(); //Creo el objeto  
+        dt.setColumnIdentifiers(encabezados);  //pongo los encabezados
+        datos.forEach((fila) -> {//recorro la lista
+            dt.addRow(fila);//adiciono la fila
+        });
         return dt;
     }
-    
+    //---------------------------------------
 }

@@ -312,7 +312,7 @@ public class Derivadas extends javax.swing.JFrame {
         }
         String expresion = expresion_math.getText();
         Derivada derivada = new Derivada(expresion);
-        Double resultado = derivada.derivacionNumericaCentral(Double.parseDouble(valor_x.getText()), 3);
+        Double resultado = derivada.derivacionNumericaClasica(Double.parseDouble(valor_x.getText()), 3);
         resultado_field.setText(resultado.toString());
     }
 
