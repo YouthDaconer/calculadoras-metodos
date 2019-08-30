@@ -106,7 +106,7 @@ public class EstandarIEEE754 extends javax.swing.JFrame {
                 txtMantisa32KeyTyped(evt);
             }
         });
-        panelEvaluador.add(txtMantisa32, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 280, -1));
+        panelEvaluador.add(txtMantisa32, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 390, -1));
 
         jLabel4.setText("64 bits:");
         panelEvaluador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 40, 20));
@@ -142,7 +142,7 @@ public class EstandarIEEE754 extends javax.swing.JFrame {
                 txtMantisa64KeyTyped(evt);
             }
         });
-        panelEvaluador.add(txtMantisa64, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 280, -1));
+        panelEvaluador.add(txtMantisa64, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 390, -1));
 
         jLabel9.setText("signo");
         panelEvaluador.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
@@ -186,7 +186,7 @@ public class EstandarIEEE754 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelEvaluador, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
