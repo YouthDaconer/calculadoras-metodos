@@ -131,17 +131,17 @@ public class NewtonRaphson {
     }
     //------------------------------------------
     
-    //    //pruebas    
-    public static void main(String[] args) {
-        NewtonRaphson n = new NewtonRaphson("cos(x)-x^3");
-        System.out.println(n.resolver(0.5));
-        System.out.println("Proceso:");
-        n.getDatos().forEach((fila) -> {
-            for (Object dato : fila) {
-                System.out.print(dato + "\t");
-            }
-            System.out.print("\n");
-        });
-    }
-//    //-------------------------------------
+//    //    //pruebas    
+//    public static void main(String[] args) {
+//        NewtonRaphson n = new NewtonRaphson("cos(x)-x^3");
+//        System.out.println(n.resolver(0.5));
+//        System.out.println("Proceso:");
+//        n.getDatos().forEach((fila) -> {
+//            for (Object dato : fila) {
+//                System.out.print(dato + "\t");
+//            }
+//            System.out.print("\n");
+//        });
+//    }
+////    //-------------------------------------
 }
