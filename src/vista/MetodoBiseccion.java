@@ -8,6 +8,7 @@ package vista;
 import control.Biseccion;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import modelo.ModelTabla;
 
 /**
  *
@@ -31,6 +32,7 @@ public class MetodoBiseccion extends javax.swing.JFrame {
         txt_limiteSuperior.setText("");
         txt_resultado.setText("");
         expresion_math.setText("");
+        btnTabla.setEnabled(false);
     }
     //-------------------------------------
 
@@ -44,12 +46,12 @@ public class MetodoBiseccion extends javax.swing.JFrame {
             Double x2 = Double.parseDouble(txt_limiteSuperior.getText());
             Double error = Double.parseDouble(txt_errorTolerado.getText());
 
-            if (x1 >= x2 || error<=0 || error >=1 ) {
+            if (x1 >= x2 || error <= 0 || error >= 1) {
                 JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien y el valor del error sea > 0 y menor a 1", "Error :(", JOptionPane.ERROR_MESSAGE);
             } else {
-                Biseccion b = new Biseccion(expresion, x1, x2, error);
+                b = new Biseccion(expresion, x1, x2, error);
 
-                resultado = "" + b.biseccion();
+                resultado = "" + b.resolver();
 
                 if (resultado.equals("NaN")) {
                     JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión", "Error :(", JOptionPane.ERROR_MESSAGE);
@@ -57,6 +59,7 @@ public class MetodoBiseccion extends javax.swing.JFrame {
                     txt_resultado.setText(resultado);
                     txt_error.setText("" + b.getError());
                     txt_iteraciones.setText("" + b.getIteraciones());
+                    btnTabla.setEnabled(true);
                 }
             }
         } catch (ArithmeticException | NumberFormatException e) {
@@ -93,6 +96,7 @@ public class MetodoBiseccion extends javax.swing.JFrame {
         txt_error = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txt_iteraciones = new javax.swing.JTextField();
+        btnTabla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,7 +208,7 @@ public class MetodoBiseccion extends javax.swing.JFrame {
                                     .addComponent(txt_limiteSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(expresion_math, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_limiteInferior, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,17 +250,31 @@ public class MetodoBiseccion extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnTabla.setText("Ver tabla");
+        btnTabla.setEnabled(false);
+        btnTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTablaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(btnTabla)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnTabla)
+                .addGap(0, 28, Short.MAX_VALUE))
         );
 
         pack();
@@ -324,8 +342,7 @@ public class MetodoBiseccion extends javax.swing.JFrame {
         if (!(Character.isDigit(c)
                 || (c == KeyEvent.VK_BACK_SPACE)
                 || (c == KeyEvent.VK_DELETE)
-                || (c == KeyEvent.VK_PERIOD)
-                || (c == KeyEvent.VK_MINUS))) {
+                || (c == KeyEvent.VK_PERIOD))) {
             getToolkit().beep();
             evt.consume();
         }
@@ -333,16 +350,17 @@ public class MetodoBiseccion extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();
         }
-
-        if (c == KeyEvent.VK_MINUS && txt_errorTolerado.getText().contains("-")) {
-            getToolkit().beep();
-            evt.consume();
-        }
+        
     }//GEN-LAST:event_txt_errorToleradoKeyTyped
 
-    
+    private void btnTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaActionPerformed
+        ModelTabla modelo = new ModelTabla(b.getEncabezados(), b.getDatos());
+        new Tabla(modelo).setVisible(true);
+    }//GEN-LAST:event_btnTablaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTabla;
     private javax.swing.JButton calcular_btn;
     private javax.swing.JButton cerrar_btn;
     private javax.swing.JTextField expresion_math;
@@ -363,4 +381,5 @@ public class MetodoBiseccion extends javax.swing.JFrame {
     private javax.swing.JTextField txt_limiteSuperior;
     private javax.swing.JTextField txt_resultado;
     // End of variables declaration//GEN-END:variables
+    private Biseccion b;
 }
