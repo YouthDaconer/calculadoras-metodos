@@ -34,38 +34,39 @@
                           <Component id="conversor_btn" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="estandar_btn" max="32767" attributes="0"/>
-                          <Component id="funciones_btn" pref="198" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="biseccion_btn" pref="196" max="32767" attributes="0"/>
-                          <Component id="regla_falsa_btn" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="estandar_btn" max="32767" attributes="0"/>
+                                  <Component id="funciones_btn" pref="198" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="biseccion_btn" pref="196" max="32767" attributes="0"/>
+                                  <Component id="regla_falsa_btn" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="conversor_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                          <Component id="estandar_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="conversor_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="estandar_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
                   <Component id="biseccion_btn" min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
@@ -88,7 +89,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="CALCULADORAS DE TODO TIPO"/>
+        <Property name="text" type="java.lang.String" value="M&#xc9;TODOS N&#xda;MERICOS"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="conversor_btn">
