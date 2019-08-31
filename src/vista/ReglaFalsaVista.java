@@ -471,8 +471,8 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
     }
 
     private void calcular() {
-        ReglaFalsa regla_falsa = new ReglaFalsa(regla_falsa_txt.getText(), Double.parseDouble(error_tolerancia.getText()), Integer.parseInt(num_iteraciones.getText()));
-        String resultado = regla_falsa.resolver(Integer.parseInt(int_inicial.getText()), Integer.parseInt(int_final.getText()));
+        ReglaFalsa regla_falsa = new ReglaFalsa(regla_falsa_txt.getText(),Double.parseDouble(int_inicial.getText()) ,Double.parseDouble(int_final.getText()) , Double.parseDouble(error_tolerancia.getText()));
+        String resultado = regla_falsa.resolver();
         resultado_txt.setText(resultado);
     }
 
