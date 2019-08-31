@@ -61,7 +61,7 @@ public class Decimal {
             int parteEntera = r.intValue();
 
             if (r >= 1) {
-                if (r > 9) {
+                if (r >= 10) {
                     int diferencia = Math.abs(parteEntera - 10);// para seleccionar la letra correspondiente
                     cadena.append(letras[diferencia]);
                 } else {
@@ -138,17 +138,20 @@ public class Decimal {
     }
     //-----------------------------------------
 
-    //pruebas
-    /*public static void main(String[] args) {
-        Decimal num = new Decimal();
-        for (int i = 2; i <= 16; i++) {
-            System.out.println("873 en base " + i + " es:" + num.cambiarABase("873", i, 10));
-        }
-        for (int i = 2; i <= 16; i++) {
-            System.out.println("3.141516 en base " + i + " es:" + num.cambiarABase("3.141516", i, 10));
-        }
-
-        System.out.println("73BC5f a decimal es: " + num.aDecimal("73BC5f", 16));
-        System.out.println("73BC5f.3 a decimal es: " + num.aDecimal("73BC5f.3", 16));
-    }*/
+//    //pruebas
+//    public static void main(String[] args) {
+//        Decimal num = new Decimal();
+////        for (int i = 2; i <= 16; i++) {
+////            System.out.println("873 en base " + i + " es:" + num.cambiarABase("873", i, 100));
+////        }
+////        for (int i = 2; i <= 16; i++) {
+////            System.out.println("799.5765  en base " + i + " es:" + num.cambiarABase("799.5765 ", i, 100));
+////        }
+//        //System.out.println("799.5765  en base " + 2+ " es:" + num.cambiarABase("799.5765 ", 2, 100));
+//        //System.out.println("799.5765  en base " + 8 + " es:" + num.cambiarABase("799.5765 ", 8, 100));
+//        System.out.println("799.5765  en base " + 16 + " es:" + num.cambiarABase("799.5765 ", 16, 100));
+//
+////        System.out.println("73BC5f a decimal es: " + num.aDecimal("73BC5f", 16));
+////        System.out.println("73BC5f.3 a decimal es: " + num.aDecimal("73BC5f.3", 16));
+//    }
 }
