@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author salas
  */
-public class ModelTabla {
+public class ModeloTabla {
 
     //Atributos de clase
     private Object[] encabezados;
@@ -20,7 +20,7 @@ public class ModelTabla {
      * @param encabezados
      * @param datos
      */
-    public ModelTabla(Object[] encabezados, ArrayList<Object[]> datos) {
+    public ModeloTabla(Object[] encabezados, ArrayList<Object[]> datos) {
         this.encabezados = encabezados;
         this.datos = datos;
     }
