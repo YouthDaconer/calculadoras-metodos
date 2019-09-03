@@ -29,7 +29,7 @@ public class Secante {
         this.f = f;
         this.a =a;
         this.b =b;
-        this.errorTol = 1e-12;
+        this.errorTol = 1e-16;
         this.iteraciones = 0;
         this.error = 0;
         this.datos = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Secante {
         this.b =b;
         this.iteraciones = 0;
         this.error = 0;
-        this.errorTol = 1e-12;
+        this.errorTol = 1e-16;
         this.datos = new ArrayList<>();
     }
 

@@ -32,7 +32,7 @@ public class NewtonRaphson {
     public NewtonRaphson(Funcion f) {
         this.f = f;
         this.d = new Derivada(f);
-        this.errorTol = 1e-12;
+        this.errorTol = 1e-16;
         this.iteraciones = 0;
         this.error = 0;
         this.datos = new ArrayList<>();
@@ -43,7 +43,7 @@ public class NewtonRaphson {
         this.d = new Derivada(funcion);
         this.iteraciones = 0;
         this.error = 0;
-        this.errorTol = 1e-12;
+        this.errorTol = 1e-16;
         this.datos = new ArrayList<>();
     }
 
