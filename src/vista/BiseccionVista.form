@@ -73,11 +73,11 @@
                       </Group>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="calcular_btn" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_calcular" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="limpiar_btn" min="-2" pref="88" max="-2" attributes="0"/>
+                              <Component id="btn_limpiar" min="-2" pref="88" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="cerrar_btn" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="btn_cerrar" min="-2" pref="93" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -135,9 +135,9 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="calcular_btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="limpiar_btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cerrar_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_calcular" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_limpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_cerrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="37" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -205,28 +205,28 @@
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_errorToleradoKeyTyped"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="calcular_btn">
+        <Component class="javax.swing.JButton" name="btn_calcular">
           <Properties>
             <Property name="text" type="java.lang.String" value="CALCULAR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcular_btnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_calcularActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="limpiar_btn">
+        <Component class="javax.swing.JButton" name="btn_limpiar">
           <Properties>
             <Property name="text" type="java.lang.String" value="LIMPIAR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="limpiar_btnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_limpiarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="cerrar_btn">
+        <Component class="javax.swing.JButton" name="btn_cerrar">
           <Properties>
             <Property name="text" type="java.lang.String" value="CERRAR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cerrar_btnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cerrarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">

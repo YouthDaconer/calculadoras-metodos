@@ -472,8 +472,8 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
 
     private void calcular() {
         ReglaFalsa regla_falsa = new ReglaFalsa(regla_falsa_txt.getText(),Double.parseDouble(int_inicial.getText()) ,Double.parseDouble(int_final.getText()) , Double.parseDouble(error_tolerancia.getText()));
-        String resultado = regla_falsa.resolver();
-        resultado_txt.setText(resultado);
+        double resultado = regla_falsa.resolver();
+        resultado_txt.setText(""+resultado);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,25 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import control.Biseccion;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-import modelo.ModelTabla;
+import modelo.ModeloTabla;
 
 /**
  *
  * @author JSRA
  */
-public class MetodoBiseccion extends javax.swing.JFrame {
+public class BiseccionVista extends javax.swing.JFrame {
 
     /**
      * Creates new form Biseccion
      */
-    public MetodoBiseccion() {
+    public BiseccionVista() {
         initComponents();
     }
 
@@ -32,10 +27,11 @@ public class MetodoBiseccion extends javax.swing.JFrame {
         txt_limiteSuperior.setText("");
         txt_resultado.setText("");
         expresion_math.setText("");
-        btnTabla.setEnabled(false);
+        btnTabla.setEnabled(false);//Únicamente se habilita cuando se hace el cálculo
     }
     //-------------------------------------
 
+    //Método que se llama después de oprimir calcular
     public void calcular() {
         String resultado = "NaN";
         try {
@@ -46,27 +42,28 @@ public class MetodoBiseccion extends javax.swing.JFrame {
             Double x2 = Double.parseDouble(txt_limiteSuperior.getText());
             Double error = Double.parseDouble(txt_errorTolerado.getText());
 
-            if (x1 >= x2 || error <= 0 || error >= 1) {
+            if (x1 >= x2 || error <= 0 || error >= 1) {// En caso de algun en el intervalo 0 con el error tolerado
                 JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien y el valor del error sea > 0 y menor a 1", "Error :(", JOptionPane.ERROR_MESSAGE);
             } else {
                 b = new Biseccion(expresion, x1, x2, error);
 
-                resultado = "" + b.resolver();
+                resultado = "" + b.resolver();//calculamos
 
-                if (resultado.equals("NaN")) {
-                    JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión", "Error :(", JOptionPane.ERROR_MESSAGE);
-                } else {
+                if (resultado.equals("NaN")) {//error
+                    JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
+                } else {//ponemos los resultados
                     txt_resultado.setText(resultado);
                     txt_error.setText("" + b.getError());
                     txt_iteraciones.setText("" + b.getIteraciones());
-                    btnTabla.setEnabled(true);
+                    btnTabla.setEnabled(true);//Habilitamos el botón de ver tabla
                 }
             }
         } catch (ArithmeticException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error :(", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
         }
 
     }
+    //------------------------
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,9 +84,9 @@ public class MetodoBiseccion extends javax.swing.JFrame {
         txt_limiteSuperior = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txt_errorTolerado = new javax.swing.JTextField();
-        calcular_btn = new javax.swing.JButton();
-        limpiar_btn = new javax.swing.JButton();
-        cerrar_btn = new javax.swing.JButton();
+        btn_calcular = new javax.swing.JButton();
+        btn_limpiar = new javax.swing.JButton();
+        btn_cerrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txt_resultado = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -129,24 +126,24 @@ public class MetodoBiseccion extends javax.swing.JFrame {
             }
         });
 
-        calcular_btn.setText("CALCULAR");
-        calcular_btn.addActionListener(new java.awt.event.ActionListener() {
+        btn_calcular.setText("CALCULAR");
+        btn_calcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calcular_btnActionPerformed(evt);
+                btn_calcularActionPerformed(evt);
             }
         });
 
-        limpiar_btn.setText("LIMPIAR");
-        limpiar_btn.addActionListener(new java.awt.event.ActionListener() {
+        btn_limpiar.setText("LIMPIAR");
+        btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limpiar_btnActionPerformed(evt);
+                btn_limpiarActionPerformed(evt);
             }
         });
 
-        cerrar_btn.setText("CERRAR");
-        cerrar_btn.addActionListener(new java.awt.event.ActionListener() {
+        btn_cerrar.setText("CERRAR");
+        btn_cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cerrar_btnActionPerformed(evt);
+                btn_cerrarActionPerformed(evt);
             }
         });
 
@@ -185,11 +182,11 @@ public class MetodoBiseccion extends javax.swing.JFrame {
                                 .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(calcular_btn)
+                            .addComponent(btn_calcular)
                             .addGap(30, 30, 30)
-                            .addComponent(limpiar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(32, 32, 32)
-                            .addComponent(cerrar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(130, 130, 130)
@@ -232,9 +229,9 @@ public class MetodoBiseccion extends javax.swing.JFrame {
                     .addComponent(txt_errorTolerado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(calcular_btn)
-                    .addComponent(limpiar_btn)
-                    .addComponent(cerrar_btn))
+                    .addComponent(btn_calcular)
+                    .addComponent(btn_limpiar)
+                    .addComponent(btn_cerrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -280,39 +277,40 @@ public class MetodoBiseccion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void calcular_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcular_btnActionPerformed
+    private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
         // TODO add your handling code here:
         calcular();
-    }//GEN-LAST:event_calcular_btnActionPerformed
+    }//GEN-LAST:event_btn_calcularActionPerformed
 
-    private void limpiar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiar_btnActionPerformed
+    private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
-    }//GEN-LAST:event_limpiar_btnActionPerformed
+    }//GEN-LAST:event_btn_limpiarActionPerformed
 
-    private void cerrar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_btnActionPerformed
+    private void btn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_cerrar_btnActionPerformed
+    }//GEN-LAST:event_btn_cerrarActionPerformed
 
+    //keyTypeds que controla que pone el usuario de entrada
     private void txt_limiteInferiorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_limiteInferiorKeyTyped
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c)
                 || (c == KeyEvent.VK_BACK_SPACE)
                 || (c == KeyEvent.VK_DELETE)
                 || (c == KeyEvent.VK_PERIOD)
-                || (c == KeyEvent.VK_MINUS))) {
+                || (c == KeyEvent.VK_MINUS))) {//que solo hacepte números, puntos, '-' y las teclas de borrado
             getToolkit().beep();
-            evt.consume();
+            evt.consume();//se elimina
         }
-        if (c == KeyEvent.VK_PERIOD && txt_limiteInferior.getText().contains(".")) {
+        if (c == KeyEvent.VK_PERIOD && txt_limiteInferior.getText().contains(".")) {//Si la caja de texto ya contiene un punto
             getToolkit().beep();
-            evt.consume();
+            evt.consume();//se elimina
         }
 
-        if (c == KeyEvent.VK_MINUS && txt_limiteInferior.getText().contains("-")) {
+        if (c == KeyEvent.VK_MINUS && txt_limiteInferior.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
             getToolkit().beep();
-            evt.consume();
+            evt.consume();//se elimina
         }
     }//GEN-LAST:event_txt_limiteInferiorKeyTyped
 
@@ -322,18 +320,18 @@ public class MetodoBiseccion extends javax.swing.JFrame {
                 || (c == KeyEvent.VK_BACK_SPACE)
                 || (c == KeyEvent.VK_DELETE)
                 || (c == KeyEvent.VK_PERIOD)
-                || (c == KeyEvent.VK_MINUS))) {
+                || (c == KeyEvent.VK_MINUS))) {//que solo hacepte números, puntos, '-' y las teclas de borrado
             getToolkit().beep();
-            evt.consume();
+            evt.consume();//se elimina
         }
-        if (c == KeyEvent.VK_PERIOD && txt_limiteSuperior.getText().contains(".")) {
+        if (c == KeyEvent.VK_PERIOD && txt_limiteSuperior.getText().contains(".")) {//Si la caja de texto ya contiene un punto
             getToolkit().beep();
-            evt.consume();
+            evt.consume();//se elimina
         }
 
-        if (c == KeyEvent.VK_MINUS && txt_limiteSuperior.getText().contains("-")) {
+        if (c == KeyEvent.VK_MINUS && txt_limiteSuperior.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
             getToolkit().beep();
-            evt.consume();
+            evt.consume();//se elimina
         }
     }//GEN-LAST:event_txt_limiteSuperiorKeyTyped
 
@@ -342,27 +340,32 @@ public class MetodoBiseccion extends javax.swing.JFrame {
         if (!(Character.isDigit(c)
                 || (c == KeyEvent.VK_BACK_SPACE)
                 || (c == KeyEvent.VK_DELETE)
-                || (c == KeyEvent.VK_PERIOD))) {
+                || (c == KeyEvent.VK_PERIOD))) {//que solo hacepte números, puntos y las teclas de borrado
             getToolkit().beep();
-            evt.consume();
+            evt.consume();//se elimina
         }
-        if (c == KeyEvent.VK_PERIOD && txt_errorTolerado.getText().contains(".")) {
+        if (c == KeyEvent.VK_PERIOD && txt_errorTolerado.getText().contains(".")) {//Si la caja de texto ya contiene un punto
             getToolkit().beep();
-            evt.consume();
+            evt.consume();//se elimina
         }
-        
-    }//GEN-LAST:event_txt_errorToleradoKeyTyped
 
+    }//GEN-LAST:event_txt_errorToleradoKeyTyped
+    //----------------------------------------------------------------
+    
+    //Al presionar este botón nos dirigiremos a la vista de la tabla del procedimiento del algoritmo
     private void btnTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaActionPerformed
-        ModelTabla modelo = new ModelTabla(b.getEncabezados(), b.getDatos());
-        new Tabla(modelo).setVisible(true);
+        /* Cada clase de métodos tiene sus atributos con sus datos y encabezados que se
+        crean después de hacer el procedimiento del cálculo respectivo*/
+        ModeloTabla modelo = new ModeloTabla(b.getEncabezados(), b.getDatos());
+        new TablaVista(modelo).setVisible(true);
     }//GEN-LAST:event_btnTablaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTabla;
-    private javax.swing.JButton calcular_btn;
-    private javax.swing.JButton cerrar_btn;
+    private javax.swing.JButton btn_calcular;
+    private javax.swing.JButton btn_cerrar;
+    private javax.swing.JButton btn_limpiar;
     private javax.swing.JTextField expresion_math;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -373,7 +376,6 @@ public class MetodoBiseccion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBiseccion;
     private javax.swing.JLabel jLabelFx;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton limpiar_btn;
     private javax.swing.JTextField txt_error;
     private javax.swing.JTextField txt_errorTolerado;
     private javax.swing.JTextField txt_iteraciones;

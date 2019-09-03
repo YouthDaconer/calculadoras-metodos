@@ -13,12 +13,12 @@ import javax.swing.JOptionPane;
  *
  * @author JSRA
  */
-public class CalculadoraFunciones extends javax.swing.JFrame {
+public class EvaluadorFuncionVista extends javax.swing.JFrame {
 
     /**
      * Creates new form EvaluadorExpresiones
      */
-    public CalculadoraFunciones() {
+    public EvaluadorFuncionVista() {
         initComponents();
         this.setLocationRelativeTo(null);
     }

@@ -7,7 +7,6 @@ package vista;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JOptionPane;
 import modelo.Conversor.Decimal;
 import modelo.Conversor.Binario;
 import modelo.Conversor.Hexadecimal;
@@ -17,7 +16,7 @@ import modelo.Conversor.Octal;
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class Convertir extends javax.swing.JFrame {
+public class ConversorBasesVista extends javax.swing.JFrame {
 
     KeyListener keyListenerDecimal;
     KeyListener keyListenerBinario;
@@ -31,7 +30,7 @@ public class Convertir extends javax.swing.JFrame {
     /**
      * Creates new form Convertir
      */
-    public Convertir() {
+    public ConversorBasesVista() {
         initComponents();
         this.setLocationRelativeTo(null);
         /* Eventos de conversión desde decimal */
@@ -141,7 +140,7 @@ public class Convertir extends javax.swing.JFrame {
                         }
                     }
                     System.out.println("esto es lo que retorna: " + keyCode);
-                    // Convertir a las demas bases
+                    // ConversorBasesVista a las demas bases
                     Decimal baseDecimal = new Decimal();
                     if (keyCode != 46) {//verificar el punto 
                         // Conversión a binario
@@ -258,7 +257,7 @@ public class Convertir extends javax.swing.JFrame {
                         }
                     }
                     System.out.println("esto es lo que retorna: " + keyCode);
-                    // Convertir a las demas bases
+                    // ConversorBasesVista a las demas bases
                     Binario baseBinario = new Binario();
                     if (keyCode != 46) {//verificar el punto 
                         // Conversión a decimal
@@ -378,7 +377,7 @@ public class Convertir extends javax.swing.JFrame {
                         }
                     }
                     System.out.println("esto es lo que retorna: " + keyCode);
-                    // Convertir a las demas bases
+                    // ConversorBasesVista a las demas bases
                     Octal baseOctal = new Octal();
                     // Conversión a decimal
                     txt_field_decimal = baseOctal.cambiarABase(txt_field_octal, 10, 10);
@@ -500,7 +499,7 @@ public class Convertir extends javax.swing.JFrame {
                         }
                     }
                     System.out.println("esto es lo que retorna: " + keyCode);
-                    // Convertir a las demas bases
+                    // ConversorBasesVista a las demas bases
                     Hexadecimal baseHexadecimal = new Hexadecimal();
                     // Conversión a decimal
                     txt_field_decimal = baseHexadecimal.cambiarABase(txt_field_hexadecimal, 10, 10);

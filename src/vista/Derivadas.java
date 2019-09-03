@@ -9,11 +9,7 @@ import control.Derivada;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JFormattedTextField;
-import javax.swing.text.MaskFormatter;
 
 /**
  *

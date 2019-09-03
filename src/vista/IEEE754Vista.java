@@ -15,12 +15,12 @@ import modelo.Conversor.IEEE754;
  *
  * @author salas
  */
-public class EstandarIEEE754 extends javax.swing.JFrame {
+public class IEEE754Vista extends javax.swing.JFrame {
 
     /**
      * Creates new form Evaluador
      */
-    public EstandarIEEE754() {
+    public IEEE754Vista() {
         initComponents();
         this.setLocationRelativeTo(null);
     }

@@ -5,20 +5,20 @@
  */
 package vista;
 
-import modelo.ModelTabla;
+import modelo.ModeloTabla;
 
 /**
  *
  * @author JSRA
  */
-public class Tabla extends javax.swing.JFrame {
+public class TablaVista extends javax.swing.JFrame {
 
     /**
      * Creates new form Tabla
      *
      * @param modelo
      */
-    public Tabla(ModelTabla modelo) {
+    public TablaVista(ModeloTabla modelo) {
         initComponents();
         tabla.setModel(modelo.getModeloTabla());
         this.repaint();

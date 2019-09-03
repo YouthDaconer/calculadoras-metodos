@@ -150,12 +150,12 @@ public class Menu extends javax.swing.JFrame {
 
     private void conversor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conversor_btnActionPerformed
         // TODO add your handling code here:
-        new Convertir().setVisible(true);
+        new ConversorBasesVista().setVisible(true);
     }//GEN-LAST:event_conversor_btnActionPerformed
 
     private void estandar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estandar_btnActionPerformed
         // TODO add your handling code here:
-        new EstandarIEEE754().setVisible(true);
+        new IEEE754Vista().setVisible(true);
     }//GEN-LAST:event_estandar_btnActionPerformed
 
     private void derivadas_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derivadas_btnActionPerformed
@@ -169,7 +169,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void funciones_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funciones_btnActionPerformed
         // TODO add your handling code here:
-        new CalculadoraFunciones().setVisible(true);
+        new EvaluadorFuncionVista().setVisible(true);
     }//GEN-LAST:event_funciones_btnActionPerformed
 
     private void graficadora_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficadora_btnActionPerformed
@@ -179,7 +179,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void biseccion_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_biseccion_btnActionPerformed
         // TODO add your handling code here:
-        new MetodoBiseccion().setVisible(true);
+        new BiseccionVista().setVisible(true);
     }//GEN-LAST:event_biseccion_btnActionPerformed
 
     private void regla_falsa_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regla_falsa_btnActionPerformed
