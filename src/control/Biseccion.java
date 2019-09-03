@@ -130,42 +130,47 @@ public class Biseccion {
         fa = f.f(a1);
         fb = f.f(b1);
         auxR = a;
-        if (fa * fb < 0) {// para verificar que existe una solución en el intervalo (a, b)
-            int i = 0;
-            String linea = "";//string que contendra la fila de valores
-            Object[] fila;//recolectará los resultados de las variables
-            do {
+        try {
+            
+            if (fa * fb < 0) {// para verificar que existe una solución en el intervalo (a, b)
+                int i = 0;
+                String linea = "";//string que contendra la fila de valores
+                Object[] fila;//recolectará los resultados de las variables
+                do {
 
-                r = prom(a1, b1);
-                fa = f.f(a1);
-                fb = f.f(b1);
-                fr = f.f(r);
-                error = Math.abs((auxR - r));//Cálculo del error
-                i++;
+                    r = prom(a1, b1);
+                    fa = f.f(a1);
+                    fb = f.f(b1);
+                    fr = f.f(r);
+                    error = Math.abs((auxR - r));//Cálculo del error
+                    i++;
 
-                linea = i + "," + a1 + "," + b1 + "," + fa + "," + fb + "," + r + "," + fr + "," + error;//le doy formato a la fila
-                fila = linea.split(",");//separo los valores y los fuardo en fila
-                datos.add(fila);//Adiciona a la lista de datos
+                    linea = i + "," + a1 + "," + b1 + "," + fa + "," + fb + "," + r + "," + fr + "," + error;//le doy formato a la fila
+                    fila = linea.split(",");//separo los valores y los fuardo en fila
+                    datos.add(fila);//Adiciona a la lista de datos
 
-                if (fr == 0) {
-                    error = 0.0;
-                    iteraciones = i;
-                    return r;//dio una raiz exacta
-                }
+                    if (fr == 0) {
+                        error = 0.0;
+                        iteraciones = i;
+                        return r;//dio una raiz exacta
+                    }
 
-                //Cambio los valores para la siguiente iteración
-                if (fa * fr < 0) {
-                    b1 = r;
-                } else {
-                    a1 = r;
-                }
-                auxR = r;
+                    //Cambio los valores para la siguiente iteración
+                    if (fa * fr < 0) {
+                        b1 = r;
+                    } else {
+                        a1 = r;
+                    }
+                    auxR = r;
 
-            } while (i <= maxIteraciones && error >= errorTolerado);
-            raiz = r;
-            iteraciones = i;
+                } while (i <= maxIteraciones && error >= errorTolerado);
+                raiz = r;
+                iteraciones = i;
+            }
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException("Error no se pudo calcular la solución :(\n" + e.getMessage());
+
         }
-
         return raiz;
     }
 

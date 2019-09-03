@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package control;
 
 import java.util.ArrayList;
@@ -15,27 +10,56 @@ public class Secante {
 
     //Atributos de clase
     private Funcion f;
-    private double xInicial, errorTol, error;
+    private double a, b, errorTol, error;
     private final int MAX_ITERACIONES = 200;
     private double iteraciones;
-    private Object[] encabezados = {"Iteración", "X0", "X1", "Xr", "error",};
+    private Object[] encabezados = {"Iteración",
+        "Extremo\ninferior",
+        "Extremo\nsuperior",
+        "Imagen\nExt. inferior",
+        "Imagen\nExt. superior",
+        "Raiz",
+        "Imagen\nraiz",
+        "Error relativo"};
     private ArrayList<Object[]> datos;
     //-----------------------
 
     //Constructores
-    public Secante(Funcion f) {
-        this.f = f;        
-        this.errorTol = 1e-10;
+    public Secante(Funcion f, double a, double b) {
+        this.f = f;
+        this.a =a;
+        this.b =b;
+        this.errorTol = 1e-12;
         this.iteraciones = 0;
         this.error = 0;
         this.datos = new ArrayList<>();
     }
 
-    public Secante(String funcion) {
-        this.f = new Funcion(funcion);        
+    public Secante(String funcion, double a, double b) {
+        this.f = new Funcion(funcion);
+        this.a =a;
+        this.b =b;
         this.iteraciones = 0;
         this.error = 0;
-        this.errorTol = 1e-10;
+        this.errorTol = 1e-12;
+        this.datos = new ArrayList<>();
+    }
+
+    public Secante(String funcion, double a, double b, double error) {
+        this.f = new Funcion(funcion);
+        this.a =a;
+        this.b =b;
+        this.iteraciones = 0;
+        this.error = 0;
+        this.errorTol = error;
+        this.datos = new ArrayList<>();
+    }
+
+    public Secante(Funcion funcion, double a, double b, double error) {
+        this.f = funcion;
+        this.iteraciones = 0;
+        this.error = 0;
+        this.errorTol = error;
         this.datos = new ArrayList<>();
     }
     //--------------------------
@@ -53,14 +77,6 @@ public class Secante {
         return iteraciones;
     }
 
-    public double getXInicial() {
-        return xInicial;
-    }
-
-    public void setXInicial(double x) {
-        this.xInicial = x;
-    }
-
     public double getError() {
         return error;
     }
@@ -75,9 +91,12 @@ public class Secante {
     //------------------------------
 
     //resuleve por el método de la secante
-    public double resolver(double x1, double x2) {
-        double x3, fx1, fx2, fx3;
-        x3 = Double.NaN;
+    public double resolver() {
+        double x1,x2,xr, fx1, fx2, fxr;
+        x1=a;
+        x2=b;
+        
+        xr = Double.NaN;
 
         try {
             if (Math.abs(f.f(x1)) < Math.abs(f.f(x2))) {// para ordenar los números
@@ -92,17 +111,17 @@ public class Secante {
             String linea = "";//string que contendra la fila de valores
             Object[] fila;//recolectará los resultados de las variables
             do {
-                x3 = x2 - (fx2 * (x1 - x2)) / (fx1 - fx2);//fórmula de la secante aproximada
-                fx3 = f.f(x3);
-                error = Math.abs(fx3);//Cálculo del error
+                xr = x2 - (fx2 * (x1 - x2)) / (fx1 - fx2);//fórmula de la secante aproximada
+                fxr = f.f(xr);
+                error = Math.abs(fxr);//Cálculo del error
                 i++;
-                linea = i + "," + x1 + "," + x2 + "," + x3 + "," + error;//le doy formato a la fila
+                linea = i + "," + x1 + "," + x2 + ","+ fx1 + ","+ fx2 + "," + xr + ","+ fxr + "," + error;//le doy formato a la fila
                 fila = linea.split(",");//separo los valores y los fuardo en fila
                 datos.add(fila);//Adiciona a la lista de datos
 
                 //Cambio los valores para la siguiente iteración
                 x1 = x2;
-                x2 = x3;
+                x2 = xr;
                 fx1 = f.f(x1);
                 fx2 = f.f(x2);
 
@@ -112,14 +131,14 @@ public class Secante {
             throw new ArithmeticException("No se pudo aproximar la raiz de la expresión :(\n" + e.getMessage());
         }
 
-        return x3;//Raiz aproximada
+        return xr;//Raiz aproximada
     }
     //------------------------------------------
 
 //    //pruebas    
 //    public static void main(String[] args) {
-//        Secante s = new Secante("x^3+2x^2+10x-20");
-//        System.out.println(s.resolver(0, 1));
+//        Secante s = new Secante("x^3+2x^2+10x-20", 0,10);
+//        System.out.println(s.resolver());
 //        System.out.println("Proceso:");
 //        s.getDatos().forEach((fila) -> {
 //            for (Object dato : fila) {

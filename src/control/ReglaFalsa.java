@@ -118,58 +118,75 @@ public class ReglaFalsa {
     //--------------------------------------   
 
     //Método que da la solución
-    public String resolver() {
+    public double resolver() {
+        double raiz = Double.NaN;
+        double a1 = a;
+        double b1 = b;
+        double r, fr;
+        double auxR = a1;
+        double fa = f.f(a1);
+        double fb = f.f(b1);
 
-        int numDec = 5;
-        double x1=a;
-        double x2 = b;
-        double x3, y3;
-        double xp = x1;
-        double y1 = f.f(x1);
-        double y2 = f.f(x2);
+        try {
 
-        
+            if (fa * fb < 0) {// para verificar que existe una solución en el intervalo (a, b)
+                int i = 0;
+                String linea = "";//string que contendra la fila de valores
+                Object[] fila;//recolectará los resultados de las variables
+                do {
+                    if ((fb - fa) == 0) {// Error
+                        return Double.NaN;
+                    }
 
-        for (int i = 1; i <= maxIteraciones; i++) {
-            
-            if ((y2 - y1) == 0) {
-                
-                return "NaN";
-            }
+                    r = (fb * a1 - fa * b1) / (fb - fa);
+                    fr = f.f(r);
+                    error = Math.abs((auxR - r));//Cálculo del error
+                    i++;
 
-            x3 = (y2 * x1 - y1 * x2) / (y2 - y1);
-            
-            if (Math.abs(xp / x3 - 1) < errorTolerado) {
-                
+                    linea = i + "," + a1 + "," + b1 + "," + fa + "," + fb + "," + r + "," + fr + "," + error;//le doy formato a la fila
+                    fila = linea.split(",");//separo los valores y los fuardo en fila
+                    datos.add(fila);//Adiciona a la lista de datos
+
+                    if (fr == 0) {
+                        error = 0.0;
+                        iteraciones = i;
+                        return r;//dio una raiz exacta
+                    }
+
+                    //Cambio los valores para la siguiente iteración
+                    if (fa * fr < 0) {
+                        b1 = r;
+                        fb = fr;
+                    } else {
+                        a1 = r;
+                        fa = fr;
+                    }
+                    auxR = r;
+
+                } while (i <= maxIteraciones && error >= errorTolerado);
+                raiz = r;
                 iteraciones = i;
-                return String.valueOf(x3);
             }
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException("Error no se pudo calcular la solución :(\n" + e.getMessage());
 
-            y3 = f.f(x3);
-
-           
-            if (y1 * y3 < 0) {
-                
-                x2 = x3;
-                y2 = y3;
-            } else {
-                
-                x1 = x3;
-                y1 = y3;
-            }
-            iteraciones = i;
-            xp = x3;
         }
-        return "" + xp;
+        return raiz;
 
     }
 
     //pruebas
 //    public static void main(String[] args) {
-//        ReglaFalsa r = new ReglaFalsa("e^(x^2)+e^x-4", 1e-10, 10);
-//        System.out.println("La solución por regla falsa es:"+r.resolver(0, 1));
+//        ReglaFalsa r = new ReglaFalsa("exp(-2*x)+x-3",0,10, 1e-12);
+//        System.out.println("La solución por regla falsa es:"+r.resolver());
 //        System.out.println("Iteraciones:"+ r.getIteraciones());
-//        System.out.println("proceso:\n"+ r.getProceso());
+//        ArrayList<Object[]> datos = r.getDatos();
+//        datos.forEach((fila) -> {
+//            for (Object dato : fila) {
+//                System.out.print(dato+"\t");
+//            }
+//            System.out.print("\n");
+//        });
 //    }
     //--------------------------------
 }

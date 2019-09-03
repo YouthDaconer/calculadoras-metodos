@@ -19,7 +19,12 @@ public class NewtonRaphson {
     private double xInicial, errorTol, error;
     private final int MAX_ITERACIONES = 200;
     private double iteraciones;
-    private Object[] encabezados = {"Iteración", "Xn-1", "Xn", "error",};
+    private Object[] encabezados = {"Iteración",
+        "Xn",
+        "Imagen Xn",
+        "Derivada Xn",
+        "Xn+1",
+        "Error relativo"};
     private ArrayList<Object[]> datos;
     //-----------------------
 
@@ -27,7 +32,7 @@ public class NewtonRaphson {
     public NewtonRaphson(Funcion f) {
         this.f = f;
         this.d = new Derivada(f);
-        this.errorTol = 1e-10;
+        this.errorTol = 1e-12;
         this.iteraciones = 0;
         this.error = 0;
         this.datos = new ArrayList<>();
@@ -38,7 +43,7 @@ public class NewtonRaphson {
         this.d = new Derivada(funcion);
         this.iteraciones = 0;
         this.error = 0;
-        this.errorTol = 1e-10;
+        this.errorTol = 1e-12;
         this.datos = new ArrayList<>();
     }
 
@@ -97,8 +102,9 @@ public class NewtonRaphson {
 
     //Método que calcula la raiz de la expresión por medio de Newton Raphson
     public double resolver(double x) {
+        double raiz = Double.NaN;
         double xr = Double.NaN;
-        
+
         try {
 
             double m = d.derivacionNumericaClasica(x, 20);
@@ -110,9 +116,9 @@ public class NewtonRaphson {
             Object[] fila;//recolectará los resultados de las variables
             do {
                 xr = x0 - (y0 / m);
-                error = Math.abs(xr - x0) / Math.abs(xr);//Cálculo el error
+                error = Math.abs(xr - x0);//Cálculo el error
                 i++;
-                linea = i + "," + x0 + "," + xr + "," + error;//le doy formato a la fila
+                linea = i + "," + x0 + "," + y0 + "," + m + "," + xr + "," + error;//le doy formato a la fila
                 fila = linea.split(",");//separo los valores y los fuardo en fila
                 datos.add(fila);//Adiciona a la lista de datos
 
@@ -120,21 +126,21 @@ public class NewtonRaphson {
                 x0 = xr;
                 y0 = f.f(x0);
                 m = d.derivacionNumericaClasica(x0, 20);
-                
+
             } while (i < MAX_ITERACIONES && error >= errorTol);
             iteraciones = i;//cantidad de iteraciones totales            
         } catch (ArithmeticException e) {
             throw new ArithmeticException("Error no se pudo calcular la solución :(\n" + e.getMessage());
         }
-
-        return xr;//Raiz calculada
+        raiz = xr;
+        return raiz;//Raiz calculada
     }
     //------------------------------------------
-    
+
 //    //    //pruebas    
 //    public static void main(String[] args) {
-//        NewtonRaphson n = new NewtonRaphson("cos(x)-x^3");
-//        System.out.println(n.resolver(0.5));
+//        NewtonRaphson n = new NewtonRaphson("x^2-4x+2");
+//        System.out.println("raiz:"+n.resolver(3.14));
 //        System.out.println("Proceso:");
 //        n.getDatos().forEach((fila) -> {
 //            for (Object dato : fila) {
