@@ -27,45 +27,52 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="graficadora_btn" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="graficadora_btn" min="-2" pref="198" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="newton_raphson_btn" min="-2" pref="198" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="secante_btn" min="-2" pref="198" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="derivadas_btn" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
                           <Component id="conversor_btn" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="estandar_btn" max="32767" attributes="0"/>
-                          <Component id="funciones_btn" pref="198" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="biseccion_btn" pref="196" max="32767" attributes="0"/>
-                          <Component id="regla_falsa_btn" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="estandar_btn" max="32767" attributes="0"/>
+                                  <Component id="funciones_btn" pref="198" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="biseccion_btn" pref="196" max="32767" attributes="0"/>
+                                  <Component id="regla_falsa_btn" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="conversor_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                          <Component id="estandar_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="conversor_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="estandar_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
                   <Component id="biseccion_btn" min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
@@ -76,7 +83,11 @@
                   <Component id="regla_falsa_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="graficadora_btn" min="-2" pref="68" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="graficadora_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="newton_raphson_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="secante_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -88,7 +99,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="CALCULADORAS DE TODO TIPO"/>
+        <Property name="text" type="java.lang.String" value="M&#xc9;TODOS N&#xda;MERICOS"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="conversor_btn">
@@ -145,6 +156,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regla_falsa_btnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="newton_raphson_btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Newton Raphson"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newton_raphson_btnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="secante_btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M&#xe9;todo de la secante"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secante_btnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

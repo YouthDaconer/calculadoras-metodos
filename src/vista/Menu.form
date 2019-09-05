@@ -27,7 +27,13 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="graficadora_btn" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="graficadora_btn" min="-2" pref="198" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="newton_raphson_btn" min="-2" pref="198" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="secante_btn" min="-2" pref="198" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="derivadas_btn" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
@@ -77,7 +83,11 @@
                   <Component id="regla_falsa_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="graficadora_btn" min="-2" pref="68" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="graficadora_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="newton_raphson_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="secante_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="16" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -146,6 +156,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regla_falsa_btnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="newton_raphson_btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Newton Raphson"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newton_raphson_btnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="secante_btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M&#xe9;todo de la secante"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secante_btnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -1,20 +1,22 @@
 package vista;
 
-import control.Biseccion;
+import control.Secante;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.ModeloTabla;
 
 /**
  *
- * @author JSRA
+ * @author Carlos Caicedo
  */
-public class BiseccionVista extends javax.swing.JFrame {
+public class SecanteVista extends javax.swing.JFrame {
+
+    Secante sec;
 
     /**
      * Creates new form Biseccion
      */
-    public BiseccionVista() {
+    public SecanteVista() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -37,26 +39,21 @@ public class BiseccionVista extends javax.swing.JFrame {
     public void calcular() {
         String resultado = "NaN";
         try {
-
             String expresion = expresion_math.getText();
-
             Double x1 = Double.parseDouble(txt_limiteInferior.getText());
             Double x2 = Double.parseDouble(txt_limiteSuperior.getText());
             Double error = Double.parseDouble(txt_errorTolerado.getText());
-
             if (x1 >= x2 || error <= 0 || error >= 1) {// En caso de algun en el intervalo 0 con el error tolerado
                 JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien y el valor del error sea > 0 y menor a 1", "Error :(", JOptionPane.ERROR_MESSAGE);
             } else {
-                b = new Biseccion(expresion, x1, x2, error);
-
-                resultado = "" + b.resolver();//calculamos
-
+                sec = new Secante(expresion, x1, x2, error);
+                resultado = "" + sec.resolver();//calculamos
                 if (resultado.equals("NaN")) {//error
                     JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
                 } else {//ponemos los resultados
                     txt_resultado.setText(resultado);
-                    txt_error.setText("" + b.getError());
-                    txt_iteraciones.setText("" + b.getIteraciones());
+                    txt_error.setText("" + sec.getError());
+                    txt_iteraciones.setText("" + sec.getIteraciones());
                     btnTabla.setEnabled(true);//Habilitamos el botón de ver tabla
                 }
             }
@@ -101,7 +98,7 @@ public class BiseccionVista extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Método de Bisección");
+        setTitle("Método de la Secante");
 
         btnTabla.setText("Ver tabla");
         btnTabla.setEnabled(false);
@@ -114,7 +111,7 @@ public class BiseccionVista extends javax.swing.JFrame {
         jLabelFx.setText("Expresión Matemática F(x):");
 
         jLabelBiseccion.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabelBiseccion.setText("MÉTODO DE BISSECCIÓN");
+        jLabelBiseccion.setText("MÉTODO DE LA SECANTE");
 
         jLabel5.setText("Error de tolerancia:");
 
@@ -145,7 +142,7 @@ public class BiseccionVista extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Raiz r:");
+        jLabel6.setText("Resultado:");
 
         txt_resultado.setEditable(false);
 
@@ -243,12 +240,9 @@ public class BiseccionVista extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(36, 36, 36))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_error, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_iteraciones, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -389,7 +383,7 @@ public class BiseccionVista extends javax.swing.JFrame {
     private void btnTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaActionPerformed
         /* Cada clase de métodos tiene sus atributos con sus datos y encabezados que se
          crean después de hacer el procedimiento del cálculo respectivo*/
-        ModeloTabla modelo = new ModeloTabla(b.getEncabezados(), b.getDatos());
+        ModeloTabla modelo = new ModeloTabla(sec.getEncabezados(), sec.getDatos());
         new TablaVista(modelo).setVisible(true);
     }//GEN-LAST:event_btnTablaActionPerformed
 
@@ -421,5 +415,5 @@ public class BiseccionVista extends javax.swing.JFrame {
     private javax.swing.JTextField txt_limiteSuperior;
     private javax.swing.JTextField txt_resultado;
     // End of variables declaration//GEN-END:variables
-    private Biseccion b;
+
 }

@@ -8,6 +8,8 @@ package vista;
 import control.ReglaFalsa;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JOptionPane;
+import modelo.ModeloTabla;
 
 /**
  *
@@ -19,244 +21,15 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
     KeyListener keyListenerIntFinal;
     String txt_field_int_inicial = "";
     String txt_field_int_final = "";
+    ReglaFalsa rf;
 
     /**
      * Creates new form ReglaFalsa
      */
     public ReglaFalsaVista() {
         initComponents();
-        resultado_txt.setEditable(false);
+        txt_resultado.setEditable(false);
         this.setLocationRelativeTo(null);
-
-        /* Eventos de conversión desde decimal */
-        keyListenerIntInicial = new KeyListener() {
-            @Override
-            public void keyPressed(KeyEvent keyEvent) {
-                printIt("Pressed", keyEvent);
-            }
-
-            @Override
-            public void keyReleased(KeyEvent keyEvent) {
-                borrarCampo(keyEvent);
-            }
-
-            @Override
-            public void keyTyped(KeyEvent keyEvent) {
-            }
-
-            private void borrarCampo(KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
-                String aux_field_decimal = "";
-                System.out.println("el enter:" + keyCode);
-                // Si solto .
-                if (keyCode == 46 || keyCode == 110) {
-                    int count = 0;
-                    char c = '.';
-                    for (int i = 0; i < txt_field_int_inicial.trim().length(); i++) {
-                        if (txt_field_int_inicial.trim().charAt(i) == c) {
-                            count++;
-                        }
-                    }
-                    if (count > 1) {
-                        aux_field_decimal = int_inicial.getText();
-                        aux_field_decimal = borrarUltimoCaracter(aux_field_decimal);
-                        int_inicial.setText(aux_field_decimal);
-                        int_inicial.requestFocus();
-                        txt_field_int_inicial = borrarUltimoCaracter(txt_field_int_inicial);
-                        return;
-                    }
-                    if (txt_field_int_inicial.trim().equals(".")) {
-                        limpiar();
-                        return;
-                    }
-                    if (!txt_field_int_inicial.contains("-")) {
-                        return;
-                    }
-                }
-                // Si solto -
-                if (keyCode == 45 || keyCode == 109) {
-                    if (txt_field_int_inicial.length() < 0) {
-                        return;
-                    }
-                }
-                // Si lo que digitó no es un número, no la tecla enter o no es la tecla retroceso
-                if (!(keyCode >= 48 && keyCode <= 57) && keyCode != 10 && keyCode != 8) {
-                    aux_field_decimal = int_inicial.getText();
-                    aux_field_decimal = borrarUltimoCaracter(aux_field_decimal);
-                    int_inicial.setText(aux_field_decimal);
-                    int_inicial.requestFocus();
-                }
-            }
-
-            private String borrarUltimoCaracter(String str) {
-                int cantidad = 1;
-                int m = Math.max(0, str.length() - cantidad);
-                return str.substring(0, str.length() - cantidad);
-            }
-
-            private void printIt(String title, KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
-                // Si presiona el signo negativo
-                if (keyCode == 45 || keyCode == 109) {
-                    if (txt_field_int_inicial.length() > 0) {
-                        return;
-                    }
-                }
-                // Si presiona retroceso y la variable tiene algo
-                if (keyCode == 8 && !txt_field_int_inicial.trim().equals("")) {
-                    // Si la variable tiene tamaño 2 y contiene un negativo
-                    if (txt_field_int_inicial.length() == 2 && txt_field_int_inicial.trim().contains("-")) {
-                        limpiar();
-                        return;
-                    }
-                    txt_field_int_inicial = borrarUltimoCaracter(txt_field_int_inicial);
-                    System.out.println("como queda al borrar el ultimo: " + txt_field_int_inicial);
-                }
-                // Si está digitando números o presiona retroceso
-                if (keyCode == 45 || keyCode == 109 || (keyCode >= 48 && keyCode <= 57) || keyCode == 8 || keyCode == 46 || keyCode == 110) {
-                    if (keyCode != 8) {
-                        // Si digito un punto
-                        if (keyCode == 46 || keyCode == 110) {
-                            // Si no comienza con - y no contiene un . entonces entra aqui
-                            if (!txt_field_int_inicial.contains("-")) {
-                                txt_field_int_inicial += ".";
-                            }
-                            return;
-                        }
-                        // Si digitó el signo menos y no tiene un menos en la cadena
-                        if (keyCode == 45 || keyCode == 109) {
-                            if (!txt_field_int_inicial.contains("-")) {
-                                txt_field_int_inicial += "-";
-                                int_inicial.setText("-");
-                            }
-                            return;
-                        } else {
-                            txt_field_int_inicial += KeyEvent.getKeyText(keyCode);
-                        }
-                    }
-                    System.out.println("esto es lo que retorna: " + keyCode);
-                    if (keyCode != 46) {//verificar el punto 
-                    }
-                }
-            }
-        };
-
-        int_inicial.addKeyListener(keyListenerIntInicial);
-
-        /* Eventos de conversión desde decimal */
-        keyListenerIntFinal = new KeyListener() {
-            @Override
-            public void keyPressed(KeyEvent keyEvent) {
-                printIt("Pressed", keyEvent);
-            }
-
-            @Override
-            public void keyReleased(KeyEvent keyEvent) {
-                borrarCampo(keyEvent);
-            }
-
-            @Override
-            public void keyTyped(KeyEvent keyEvent) {
-            }
-
-            private void borrarCampo(KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
-                String aux_field_decimal = "";
-                System.out.println("el enter:" + keyCode);
-                // Si solto .
-                if (keyCode == 46 || keyCode == 110) {
-                    int count = 0;
-                    char c = '.';
-                    for (int i = 0; i < txt_field_int_final.trim().length(); i++) {
-                        if (txt_field_int_final.trim().charAt(i) == c) {
-                            count++;
-                        }
-                    }
-                    if (count > 1) {
-                        aux_field_decimal = int_final.getText();
-                        aux_field_decimal = borrarUltimoCaracter(aux_field_decimal);
-                        int_final.setText(aux_field_decimal);
-                        int_final.requestFocus();
-                        txt_field_int_final = borrarUltimoCaracter(txt_field_int_final);
-                        return;
-                    }
-                    if (txt_field_int_final.trim().equals(".")) {
-                        limpiar();
-                        return;
-                    }
-                    if (!txt_field_int_final.contains("-")) {
-                        return;
-                    }
-                }
-                // Si solto -
-                if (keyCode == 45 || keyCode == 109) {
-                    if (txt_field_int_final.length() < 0) {
-                        return;
-                    }
-                }
-                // Si lo que digitó no es un número, no la tecla enter o no es la tecla retroceso
-                if (!(keyCode >= 48 && keyCode <= 57) && keyCode != 10 && keyCode != 8) {
-                    aux_field_decimal = int_final.getText();
-                    aux_field_decimal = borrarUltimoCaracter(aux_field_decimal);
-                    int_final.setText(aux_field_decimal);
-                    int_final.requestFocus();
-                }
-            }
-
-            private String borrarUltimoCaracter(String str) {
-                int cantidad = 1;
-                int m = Math.max(0, str.length() - cantidad);
-                return str.substring(0, str.length() - cantidad);
-            }
-
-            private void printIt(String title, KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
-                // Si presiona el signo negativo
-                if (keyCode == 45 || keyCode == 109) {
-                    if (txt_field_int_final.length() > 0) {
-                        return;
-                    }
-                }
-                // Si presiona retroceso y la variable tiene algo
-                if (keyCode == 8 && !txt_field_int_final.trim().equals("")) {
-                    // Si la variable tiene tamaño 2 y contiene un negativo
-                    if (txt_field_int_final.length() == 2 && txt_field_int_final.trim().contains("-")) {
-                        limpiar();
-                        return;
-                    }
-                    txt_field_int_final = borrarUltimoCaracter(txt_field_int_final);
-                    System.out.println("como queda al borrar el ultimo: " + txt_field_int_final);
-                }
-                // Si está digitando números o presiona retroceso
-                if (keyCode == 45 || keyCode == 109 || (keyCode >= 48 && keyCode <= 57) || keyCode == 8 || keyCode == 46 || keyCode == 110) {
-                    if (keyCode != 8) {
-                        // Si digito un punto
-                        if (keyCode == 46 || keyCode == 110) {
-                            // Si no comienza con - y no contiene un . entonces entra aqui
-                            if (!txt_field_int_final.contains("-")) {
-                                txt_field_int_final += ".";
-                            }
-                            return;
-                        }
-                        // Si digitó el signo menos y no tiene un menos en la cadena
-                        if (keyCode == 45 || keyCode == 109) {
-                            if (!txt_field_int_final.contains("-")) {
-                                txt_field_int_final += "-";
-                                int_final.setText("-");
-                            }
-                            return;
-                        } else {
-                            txt_field_int_final += KeyEvent.getKeyText(keyCode);
-                        }
-                    }
-                    System.out.println("esto es lo que retorna: " + keyCode);
-                    if (keyCode != 46) {//verificar el punto 
-                    }
-                }
-            }
-        };
-
-        int_final.addKeyListener(keyListenerIntFinal);
     }
 
     /**
@@ -278,14 +51,17 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
         int_final = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         error_tolerancia = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        num_iteraciones = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        resultado_txt = new javax.swing.JTextField();
+        txt_resultado = new javax.swing.JTextField();
         calcular_btn = new javax.swing.JButton();
         limpiar_btn = new javax.swing.JButton();
         cerrar_btn = new javax.swing.JButton();
+        btnTabla = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txt_error = new javax.swing.JTextField();
+        txt_iteraciones = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Regla Falsa");
@@ -299,7 +75,19 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
 
         jLabel3.setText("Desde (a)");
 
+        int_inicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                int_inicialKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Hasta (b)");
+
+        int_final.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                int_finalKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -332,13 +120,17 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
 
         jLabel5.setText("Error de tolerancia (Et):");
 
-        jLabel6.setText("Número de Iteraciones:");
+        error_tolerancia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                error_toleranciaKeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Resultado:");
 
-        resultado_txt.addActionListener(new java.awt.event.ActionListener() {
+        txt_resultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resultado_txtActionPerformed(evt);
+                txt_resultadoActionPerformed(evt);
             }
         });
 
@@ -363,85 +155,122 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
             }
         });
 
+        btnTabla.setText("Ver tabla");
+        btnTabla.setEnabled(false);
+        btnTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTablaActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Error relativo err:");
+
+        jLabel9.setText("Iteraciones   n");
+
+        txt_error.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_errorActionPerformed(evt);
+            }
+        });
+
+        txt_iteraciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_iteracionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(calcular_btn)
-                        .addGap(30, 30, 30)
-                        .addComponent(limpiar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(cerrar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(34, 34, 34)
-                                .addComponent(regla_falsa_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                                .addComponent(calcular_btn)
+                                .addGap(30, 30, 30)
+                                .addComponent(limpiar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(cerrar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addGap(13, 13, 13)
+                                    .addComponent(error_tolerancia, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                                .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(error_tolerancia, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(num_iteraciones, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(resultado_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                            .addComponent(btnTabla)
+                            .addComponent(txt_error, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_iteraciones, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(regla_falsa_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(regla_falsa_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(11, 11, 11)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(regla_falsa_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(error_tolerancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(num_iteraciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(resultado_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(calcular_btn)
                     .addComponent(limpiar_btn)
                     .addComponent(cerrar_btn))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_error, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(txt_iteraciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnTabla)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void resultado_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultado_txtActionPerformed
+    private void txt_resultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_resultadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_resultado_txtActionPerformed
+    }//GEN-LAST:event_txt_resultadoActionPerformed
 
     private void calcular_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcular_btnActionPerformed
         // TODO add your handling code here:
@@ -458,6 +287,88 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cerrar_btnActionPerformed
 
+    private void int_inicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_int_inicialKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE)
+                || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_PERIOD)
+                || (c == KeyEvent.VK_MINUS))) {//que solo hacepte números, puntos, '-' y las teclas de borrado
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+        if (c == KeyEvent.VK_PERIOD && int_inicial.getText().contains(".")) {//Si la caja de texto ya contiene un punto
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+
+        if (c == KeyEvent.VK_MINUS && int_inicial.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+    }//GEN-LAST:event_int_inicialKeyTyped
+
+    private void int_finalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_int_finalKeyTyped
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE)
+                || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_PERIOD)
+                || (c == KeyEvent.VK_MINUS))) {//que solo hacepte números, puntos, '-' y las teclas de borrado
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+        if (c == KeyEvent.VK_PERIOD && int_final.getText().contains(".")) {//Si la caja de texto ya contiene un punto
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+
+        if (c == KeyEvent.VK_MINUS && int_final.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+    }//GEN-LAST:event_int_finalKeyTyped
+
+    private void error_toleranciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_error_toleranciaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE)
+                || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_PERIOD)
+                || (c == KeyEvent.VK_MINUS))) {//que solo hacepte números, puntos, '-' y las teclas de borrado
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+        if (c == KeyEvent.VK_PERIOD && error_tolerancia.getText().contains(".")) {//Si la caja de texto ya contiene un punto
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+
+        if (c == KeyEvent.VK_MINUS && error_tolerancia.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+    }//GEN-LAST:event_error_toleranciaKeyTyped
+
+    private void btnTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaActionPerformed
+        /* Cada clase de métodos tiene sus atributos con sus datos y encabezados que se
+         crean después de hacer el procedimiento del cálculo respectivo*/
+        ModeloTabla modelo = new ModeloTabla(rf.getEncabezados(), rf.getDatos());
+        new TablaVista(modelo).setVisible(true);
+    }//GEN-LAST:event_btnTablaActionPerformed
+
+    private void txt_errorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_errorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_errorActionPerformed
+
+    private void txt_iteracionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_iteracionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_iteracionesActionPerformed
+
     private void limpiar() {
         txt_field_int_final = "";
         txt_field_int_inicial = "";
@@ -465,18 +376,45 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
         int_inicial.setText("");
         int_final.setText("");
         error_tolerancia.setText("");
-        resultado_txt.setText("");
-        num_iteraciones.setText("");
+        txt_resultado.setText("");
+        txt_error.setText("");
+        txt_iteraciones.setText("");
         regla_falsa_txt.requestFocus();
     }
 
     private void calcular() {
-        ReglaFalsa regla_falsa = new ReglaFalsa(regla_falsa_txt.getText(),Double.parseDouble(int_inicial.getText()) ,Double.parseDouble(int_final.getText()) , Double.parseDouble(error_tolerancia.getText()));
-        double resultado = regla_falsa.resolver();
-        resultado_txt.setText(""+resultado);
+        String resultado = "NaN";
+        try {
+            String expresion = regla_falsa_txt.getText();
+            Double x1 = Double.parseDouble(int_inicial.getText());
+            Double x2 = Double.parseDouble(int_final.getText());
+            Double error = Double.parseDouble(error_tolerancia.getText());
+
+            if (x1 >= x2 || error <= 0 || error >= 1) {// En caso de algun en el intervalo 0 con el error tolerado
+                JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien y el valor del error sea > 0 y menor a 1", "Error :(", JOptionPane.ERROR_MESSAGE);
+            } else {
+                rf = new ReglaFalsa(expresion, x1, x2, error);
+
+                resultado = "" + rf.resolver();//calculamos
+
+                if (resultado.equals("NaN")) {//error
+                    JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
+                } else { //ponemos los resultados
+                    txt_resultado.setText(resultado);
+                    txt_error.setText("" + rf.getError());
+                    txt_iteraciones.setText("" + rf.getIteraciones());
+                    btnTabla.setEnabled(true); //Habilitamos el botón de ver tabla
+                }
+            }
+        } catch (ArithmeticException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
+        } catch (NumberFormatException es) {
+            JOptionPane.showMessageDialog(this, "Verifique que todos los campos hayan sido llenados correctamente", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTabla;
     private javax.swing.JButton calcular_btn;
     private javax.swing.JButton cerrar_btn;
     private javax.swing.JTextField error_tolerancia;
@@ -487,13 +425,15 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton limpiar_btn;
-    private javax.swing.JTextField num_iteraciones;
     private javax.swing.JTextField regla_falsa_txt;
-    private javax.swing.JTextField resultado_txt;
+    private javax.swing.JTextField txt_error;
+    private javax.swing.JTextField txt_iteraciones;
+    private javax.swing.JTextField txt_resultado;
     // End of variables declaration//GEN-END:variables
 }

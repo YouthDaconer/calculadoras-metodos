@@ -22,127 +22,14 @@ public class Derivadas extends javax.swing.JFrame {
 
     /**
      * Creates new form Derivadas
+     *
      * @throws java.text.ParseException
      */
     public Derivadas() throws ParseException {
         initComponents();
-        resultado_field.setEditable(false);
+        resultado_primera_d.setEditable(false);
+        resultado_segunda_d.setEditable(false);
         this.setLocationRelativeTo(null);
-
-        /* Eventos de conversión desde decimal */
-        keyListenerDecimal = new KeyListener() {
-            @Override
-            public void keyPressed(KeyEvent keyEvent) {
-                printIt("Pressed", keyEvent);
-            }
-
-            @Override
-            public void keyReleased(KeyEvent keyEvent) {
-                borrarCampo(keyEvent);
-            }
-
-            @Override
-            public void keyTyped(KeyEvent keyEvent) {
-            }
-
-            private void borrarCampo(KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
-                String aux_field_decimal = "";
-                System.out.println("el enter:" + keyCode);
-                // Si solto .
-                if (keyCode == 46 || keyCode == 110) {
-                    int count = 0;
-                    char c = '.';
-                    for (int i = 0; i < txt_field_decimal.trim().length(); i++) {
-                        if (txt_field_decimal.trim().charAt(i) == c) {
-                            count++;
-                        }
-                    }
-                    if (count > 1) {
-                        aux_field_decimal = valor_x.getText();
-                        aux_field_decimal = borrarUltimoCaracter(aux_field_decimal);
-                        valor_x.setText(aux_field_decimal);
-                        valor_x.requestFocus();
-                        txt_field_decimal = borrarUltimoCaracter(txt_field_decimal);
-                        return;
-                    }
-                    if (txt_field_decimal.trim().equals(".")) {
-                        limpiarCampos();
-                        return;
-                    }
-                    if (!txt_field_decimal.contains("-")) {
-                        return;
-                    }
-                }
-                // Si solto -
-                if (keyCode == 45 || keyCode == 109) {
-                    if (txt_field_decimal.length() < 0) {
-                        return;
-                    }
-                }
-                // Si lo que digitó no es un número, no la tecla enter o no es la tecla retroceso
-                if (!(keyCode >= 48 && keyCode <= 57) && keyCode != 10 && keyCode != 8) {
-                    aux_field_decimal = valor_x.getText();
-                    aux_field_decimal = borrarUltimoCaracter(aux_field_decimal);
-                    valor_x.setText(aux_field_decimal);
-                    valor_x.requestFocus();
-                }
-            }
-
-            private String borrarUltimoCaracter(String str) {
-                int cantidad = 1;
-                int m = Math.max(0, str.length() - cantidad);
-                return str.substring(0, str.length() - cantidad);
-            }
-
-            private void printIt(String title, KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
-                // Si presiona el signo negativo
-                if (keyCode == 45 || keyCode == 109) {
-                    if (txt_field_decimal.length() > 0) {
-                        return;
-                    }
-                }
-                // Si presiona retroceso y la variable tiene algo
-                if (keyCode == 8 && !txt_field_decimal.trim().equals("")) {
-                    // Si la variable tiene tamaño 2 y contiene un negativo
-                    if (txt_field_decimal.length() == 2 && txt_field_decimal.trim().contains("-")) {
-                        limpiarCampos();
-                        return;
-                    }
-                    txt_field_decimal = borrarUltimoCaracter(txt_field_decimal);
-                    System.out.println("como queda al borrar el ultimo: " + txt_field_decimal);
-                }
-                // Si está digitando números o presiona retroceso
-                if (keyCode == 45 || keyCode == 109 || (keyCode >= 48 && keyCode <= 57) || keyCode == 8 || keyCode == 46 || keyCode == 110) {
-                    if (keyCode != 8) {
-                        // Si digito un punto
-                        if (keyCode == 46 || keyCode == 110) {
-                            // Si no comienza con - y no contiene un . entonces entra aqui
-                            if (!txt_field_decimal.contains("-")) {
-                                txt_field_decimal += ".";
-                            }
-                            return;
-                        }
-                        // Si digitó el signo menos y no tiene un menos en la cadena
-                        if (keyCode == 45 || keyCode == 109) {
-                            if (!txt_field_decimal.contains("-")) {
-                                txt_field_decimal += "-";
-                                valor_x.setText("-");
-                            }
-                            return;
-                        } else {
-                            txt_field_decimal += KeyEvent.getKeyText(keyCode);
-                        }
-                    }
-                    System.out.println("esto es lo que retorna: " + keyCode);
-                    if (keyCode != 46) {//verificar el punto 
-                    }
-                }
-            }
-        };
-
-        valor_x.addKeyListener(keyListenerDecimal);
     }
 
     public void limpiarCampos() {
@@ -165,10 +52,12 @@ public class Derivadas extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         valor_x = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        resultado_field = new javax.swing.JTextField();
+        resultado_primera_d = new javax.swing.JTextField();
         calcular_btn = new javax.swing.JButton();
         limpiar_btn = new javax.swing.JButton();
         cerrar_btn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        resultado_segunda_d = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Método de Derivación");
@@ -184,9 +73,12 @@ public class Derivadas extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 valor_xKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                valor_xKeyTyped(evt);
+            }
         });
 
-        jLabel4.setText("Resultado de la derivada F'(x)");
+        jLabel4.setText("Primera Derivada F'(x)");
 
         calcular_btn.setText("CALCULAR");
         calcular_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -209,6 +101,8 @@ public class Derivadas extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Segunda Derivada F''(x)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,29 +112,34 @@ public class Derivadas extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92))
             .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(42, 42, 42)
-                            .addComponent(calcular_btn)
-                            .addGap(30, 30, 30)
-                            .addComponent(limpiar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(32, 32, 32)
-                            .addComponent(cerrar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(26, 26, 26)
-                            .addComponent(resultado_field, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(calcular_btn)
+                        .addGap(30, 30, 30)
+                        .addComponent(limpiar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(cerrar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(expresion_math, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(valor_x, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(26, 26, 26)
+                                .addComponent(resultado_segunda_d, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(26, 26, 26)
+                                .addComponent(resultado_primera_d, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(expresion_math, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(valor_x, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,16 +154,20 @@ public class Derivadas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(valor_x, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(resultado_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(calcular_btn)
                     .addComponent(limpiar_btn)
                     .addComponent(cerrar_btn))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(resultado_primera_d, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(resultado_segunda_d, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -289,11 +192,34 @@ public class Derivadas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_valor_xKeyReleased
 
+    private void valor_xKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valor_xKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c)
+                || (c == KeyEvent.VK_BACK_SPACE)
+                || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_PERIOD)
+                || (c == KeyEvent.VK_MINUS))) {//que solo hacepte números, puntos, '-' y las teclas de borrado
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+        if (c == KeyEvent.VK_PERIOD && valor_x.getText().contains(".")) {//Si la caja de texto ya contiene un punto
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+
+        if (c == KeyEvent.VK_MINUS && valor_x.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+    }//GEN-LAST:event_valor_xKeyTyped
+
     private void limpiar() {
         expresion_math.setText("");
         txt_field_decimal = "";
         valor_x.setText("");
-        resultado_field.setText("");
+        resultado_primera_d.setText("");
+        resultado_segunda_d.setText("");
         expresion_math.requestFocus();
     }
 
@@ -308,8 +234,10 @@ public class Derivadas extends javax.swing.JFrame {
         }
         String expresion = expresion_math.getText();
         Derivada derivada = new Derivada(expresion);
-        Double resultado = derivada.derivacionNumericaClasica(Double.parseDouble(valor_x.getText()), 3);
-        resultado_field.setText(resultado.toString());
+        Double resultado_primera = derivada.derivacionNumericaClasica(Double.parseDouble(valor_x.getText()), 3);
+        resultado_primera_d.setText(resultado_primera.toString());
+        Double resultado_segunda = derivada.segundaDerivadaCentral(Double.parseDouble(valor_x.getText()), 3);
+        resultado_segunda_d.setText(resultado_segunda.toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -320,8 +248,10 @@ public class Derivadas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton limpiar_btn;
-    private javax.swing.JTextField resultado_field;
+    private javax.swing.JTextField resultado_primera_d;
+    private javax.swing.JTextField resultado_segunda_d;
     private javax.swing.JTextField valor_x;
     // End of variables declaration//GEN-END:variables
 }
