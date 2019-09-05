@@ -32,6 +32,7 @@ public class NewtonRaphsonVista extends javax.swing.JFrame {
         txt_errorTolerado.setText("");
         txt_iteraciones.setText("");
         txt_resultado.setText("");
+        txt_valor_x.setText("");
         expresion_math.setText("");
         btnTabla.setEnabled(false);//Únicamente se habilita cuando se hace el cálculo
         expresion_math.requestFocus();
@@ -318,11 +319,17 @@ public class NewtonRaphsonVista extends javax.swing.JFrame {
         if (!(Character.isDigit(c)
                 || (c == KeyEvent.VK_BACK_SPACE)
                 || (c == KeyEvent.VK_DELETE)
-                || (c == KeyEvent.VK_PERIOD))) {//que solo hacepte números, puntos y las teclas de borrado
+                || (c == KeyEvent.VK_PERIOD)
+                || (c == KeyEvent.VK_MINUS))) {//que solo hacepte números, puntos y las teclas de borrado
             getToolkit().beep();
             evt.consume();//se elimina
         }
         if (c == KeyEvent.VK_PERIOD && txt_valor_x.getText().contains(".")) {//Si la caja de texto ya contiene un punto
+            getToolkit().beep();
+            evt.consume();//se elimina
+        }
+        
+        if (c == KeyEvent.VK_MINUS && txt_valor_x.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
             getToolkit().beep();
             evt.consume();//se elimina
         }
