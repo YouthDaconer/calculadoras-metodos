@@ -13,8 +13,13 @@ public class Polinomio {
     private String expresion;
     private Graeffe g;
 
-    public Polinomio(String expresion) {
+    public Polinomio(String expresion) throws Exception {
         this.expresion = expresion.trim();
+        try{
+            this.coeficientes();
+        }catch(Exception e){
+            throw new Exception("No se pudo calcular los coeficientes del polinomio :(");
+        }
     }
 
     public String getExpresion() {
@@ -70,14 +75,16 @@ public class Polinomio {
         return g.getRaicesComplejas();
     }
 
-    public static void main(String[] args) {
-        Polinomio p = new Polinomio("3x^4-6.5x^3+8.96x^2-15.25x-9.45");
-        p.coeficientes();
-        System.out.println("Expresion: "+p.getExpresion()+"\nreales:\n"+p.getRaices() +"\ncomplejas:\n"+ p.getRaicesComplejas());
-        
-        Polinomio p2 = new Polinomio("-8.234x^3 -36.05x^2 +69.95x +19.56");
-        p2.coeficientes();
-        System.out.println("Expresion: "+p2.getExpresion()+"\nreales:\n"+p2.getRaices() +"\ncomplejas:\n"+ p2.getRaicesComplejas());
-    }
+    //Pruebas
+//    public static void main(String[] args) {
+//        Polinomio p = new Polinomio("3x^4-6.5x^3+8.96x^2-15.25x-9.45");
+//        p.coeficientes();
+//        System.out.println("Expresion: "+p.getExpresion()+"\nreales:\n"+p.getRaices() +"\ncomplejas:\n"+ p.getRaicesComplejas());
+//        
+//        Polinomio p2 = new Polinomio("-8.234x^3 -36.05x^2 +69.95x +19.56");
+//        p2.coeficientes();
+//        System.out.println("Expresion: "+p2.getExpresion()+"\nreales:\n"+p2.getRaices() +"\ncomplejas:\n"+ p2.getRaicesComplejas());
+//    }
+    //-------------------------------------
 
 }
