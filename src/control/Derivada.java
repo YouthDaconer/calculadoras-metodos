@@ -60,9 +60,9 @@ public class Derivada {
     public Double derivacionNumericaCentral(double x, int cifras) {
 
         Double resultado = Double.NaN;// no un valor numerico
-        h = 0.025;
+        h = 1e-10;
         try {
-            resultado = ((f.f(x + h) - f.f(x - h)) / 2 * h);//formula de derivación numérica
+            resultado = ((f.f(x + h) - f.f(x - h)) / (2 * h));//formula de derivación numérica
             resultado = f.redondeo(Double.toString(resultado), cifras);//redondeo a 5 cifras
         } catch (ArithmeticException e) {
             throw new ArithmeticException("No se pudo evaluar la derivada en el punto " + x);// en caso de que no se pueda hallar la derivada
@@ -78,7 +78,7 @@ public class Derivada {
     public Double segundaDerivadaCentral(double x, int cifras) {
 
         Double resultado = Double.NaN;// no un valor numerico
-        h = 0.025;
+        h = 1e-5;
         try {
             resultado = ((f.f(x + h) - (2 * f.f(x)) + f.f(x - h)) / Math.pow(h, 2));//formula de derivación numérica
             resultado = f.redondeo(Double.toString(resultado), cifras);//redondeo a 5 cifras
@@ -91,8 +91,10 @@ public class Derivada {
 
 //    //pruebas
 //    public static void main(String[] args) {
-//        Derivada d = new Derivada("5x^2");// expresion
-//        System.out.println("resultado: " + d.derivacionNumérica(2, 5));
+//        Derivada d = new Derivada("tan(x)");// expresion
+//        System.out.println("resultado: " + d.derivacionNumericaClasica(1, 10));
+//        System.out.println("resultado: " + d.derivacionNumericaCentral(1, 10));
+//        System.out.println("resultado: " + d.segundaDerivadaCentral(1, 10));
 //    }
 //    //-----------------------------------
 }

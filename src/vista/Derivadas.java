@@ -234,9 +234,9 @@ public class Derivadas extends javax.swing.JFrame {
         }
         String expresion = expresion_math.getText();
         Derivada derivada = new Derivada(expresion);
-        Double resultado_primera = derivada.derivacionNumericaClasica(Double.parseDouble(valor_x.getText()), 3);
+        Double resultado_primera = derivada.derivacionNumericaCentral(Double.parseDouble(valor_x.getText()), 5);
         resultado_primera_d.setText(resultado_primera.toString());
-        Double resultado_segunda = derivada.segundaDerivadaCentral(Double.parseDouble(valor_x.getText()), 3);
+        Double resultado_segunda = derivada.segundaDerivadaCentral(Double.parseDouble(valor_x.getText()), 5);
         resultado_segunda_d.setText(resultado_segunda.toString());
     }
 

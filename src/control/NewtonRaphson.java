@@ -107,7 +107,7 @@ public class NewtonRaphson {
 
         try {
 
-            double m = d.derivacionNumericaClasica(x, 20);
+            double m = d.derivacionNumericaCentral(x, 20);
             double y0 = f.f(x);
             double x0 = x;
 
@@ -125,7 +125,7 @@ public class NewtonRaphson {
                 //Cambio los valores para la siguiente iteración
                 x0 = xr;
                 y0 = f.f(x0);
-                m = d.derivacionNumericaClasica(x0, 20);
+                m = d.derivacionNumericaCentral(x0, 20);
 
             } while (i < MAX_ITERACIONES && error >= errorTol);
             iteraciones = i;//cantidad de iteraciones totales            
