@@ -231,6 +231,17 @@ public class Graeffe {
         return cadena;
     }
     //----------------------------------
+    //Método que devuelve las raices reales del polinomio y x = 0 si fue factorizable
+    public String getRaicesReales(boolean factorizable) {
+        String cadena = "0\n";
+        if (numReales != 0) {
+            for (int i = 0; i < numReales; i++) {
+                cadena += (raicesReales[i] + valorPolinomio(raicesReales[i])) + "\n";
+            }
+        }
+        return cadena;
+    }
+    //----------------------------------
 
     //Método que devuelve las raices complejas
     public String getRaicesComplejas() {

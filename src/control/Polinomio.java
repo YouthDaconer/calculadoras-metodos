@@ -14,6 +14,7 @@ public class Polinomio {
     private double[] coeficientes;
     private String expresion;
     private Graeffe g;
+    private boolean factorizable;
     //-----------------------
 
     /**
@@ -24,6 +25,7 @@ public class Polinomio {
      */
     public Polinomio(String expresion) throws Exception {
         this.expresion = quitaEspacios(expresion);
+        this.factorizable = false;
         lista = new ArrayList<>();
         try {
             leerPolinomio();
@@ -36,7 +38,11 @@ public class Polinomio {
     //getters and setters
     public String getRaices() {
         g = new Graeffe(coeficientes);
-        return g.getRaicesReales();
+        if (factorizable) {
+            return g.getRaicesReales(factorizable);
+        } else {
+            return g.getRaicesReales();
+        }
     }
 
     public String getRaicesComplejas() {
@@ -107,36 +113,67 @@ public class Polinomio {
             }
 
         }
-        if (!lista.isEmpty()) {//si la lista no está vacia
-            coeficientes = new double[lista.size()];  //creamos el arreglo de coeficientes                           
-            Collections.sort(lista);//Ordenamos el polinomio de acuerdo a los exponentes de los términos            
+        if (!lista.isEmpty()) {//si la lista no está vacia                                   
+            comprobarTerminos();//Comprobamos que Términos hacen falta
+            coeficientes = new double[lista.size()];  //creamos el arreglo de coeficientes    
             for (int i = 0; i < lista.size(); i++) {
                 coeficientes[i] = lista.get(i).getCoeficiente();//agregamos los coeficientes
             }
-
-            expresion = "";
-            lista.forEach((termino) -> {//Re escribo el polinomio ordenado
-                if (Math.abs(termino.getCoeficiente()) == 1 && termino.getExponente() == 1) {
-                    expresion += "x +";
-                } else {
-                    if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() > 1) {
-                        expresion += termino.getCoeficiente() + "x^" + termino.getExponente() + " +";
-                    } else {
-                        if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() == 0) {
-                            expresion += termino.getCoeficiente();
-                        } else {
-                            if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() == 1) {
-                                expresion += termino.getCoeficiente() + "x +";
-                            }
-                        }
-                    }
-                }
-            });
-            expresion = quitaEspacios(expresion.replace("+-", "-"));//quito espacios y reemplazo(+-)
-
+            arreglaExpresion();
         }
     }
     //---------------------------------------
+
+    /**
+     * Comprueba si hace falta un termino en la lista y lo pone con coeficiente
+     * 0
+     *
+     */
+    public void comprobarTerminos() {
+        Collections.sort(lista, Collections.reverseOrder());//Ordenamos el polinomio de acuerdo de menor a mayor   
+        int exp1 = lista.get(0).getExponente();
+        int exp2;
+
+        if (exp1 != 0) {//Si no existe el término independiente y una de las soluciones es x = 0
+            factorizable = true;
+        }
+        for (int i = 0; i < lista.size() - 1; i++) {
+            exp1 = lista.get(i).getExponente() + 1;//Sacamos el exponente correspondiente con + 1 para comparar con el siguiente
+            exp2 = lista.get(i + 1).getExponente();//Sacamos el siguiente
+            if (exp1 != exp2) {//Si no son iguales falta un Termino
+                lista.add(i + 1, new Termino(exp1));//Adicionamos a una lista temporal con coeficiente cero( ver constructor de Termino)             
+            }
+        }
+        Collections.sort(lista);//Ordenamos el polinomio de mayor a menor 
+    }
+    //-------------------------------------------
+
+    /**
+     * Arregla la expresión en cadena
+     *
+     */
+    private void arreglaExpresion() {
+        expresion = "";
+        lista.forEach((termino) -> {//Re escribo el polinomio ordenado
+            if (Math.abs(termino.getCoeficiente()) == 1 && termino.getExponente() == 1) {
+                expresion += "x +";
+            } else {
+                if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() > 1) {
+                    expresion += termino.getCoeficiente() + "x^" + termino.getExponente() + " +";
+                } else {
+                    if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() == 0) {
+                        expresion += termino.getCoeficiente();
+                    } else {
+                        if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() == 1) {
+                            expresion += termino.getCoeficiente() + "x +";
+                        }
+                    }
+                }
+            }
+        });
+        expresion = quitaEspacios(expresion.replace("+-", "-"));//quito espacios y reemplazo(+-)
+    }
+    //-------------------------------------------
 
     /**
      * Quita los espacios de un String
@@ -165,6 +202,23 @@ public class Polinomio {
     private class Termino implements Comparable<Termino> {
 
         private Object coeficiente, exponente;
+
+        //Constructores
+        public Termino() {
+            this.coeficiente = "0";
+            this.exponente = 0;
+        }
+
+        public Termino(Object exponente) {
+            this.coeficiente = "0";
+            this.exponente = exponente;
+        }
+
+        public Termino(Object coeficiente, Object exponente) {
+            this.coeficiente = coeficiente;
+            this.exponente = exponente;
+        }
+        //----------------------------------------
 
         public double getCoeficiente() {
             return Double.parseDouble(coeficiente.toString());
@@ -196,14 +250,15 @@ public class Polinomio {
     }
 
     //Pruebas
-//    public static void main(String[] args) throws Exception {
-////        Polinomio p = new Polinomio("3x^4-6.5x^3+8.96x^2-15.25x-9.45");
-////        System.out.println("Expresion: "+p.getExpresion()+"\nreales:\n"+p.getRaices() +"\ncomplejas:\n"+ p.getRaicesComplejas());     
-////        Polinomio p2 = new Polinomio("-8.234x^3 -36.05x^2 +69.95x +19.56");
-////        System.out.println("Expresion: "+p2.getExpresion()+"\nreales:\n"+p2.getRaices() +"\ncomplejas:\n"+ p2.getRaicesComplejas());
-////        Polinomio p3 = new Polinomio("19.56-36.05x^2 -8.234x^3 +69.95x");
-////        System.out.println("Expresion: " + p3.getExpresion() + "\nreales:\n" + p3.getRaices() + "\ncomplejas:\n" + p3.getRaicesComplejas());
-//    }
+    public static void main(String[] args) throws Exception {
+//        Polinomio p = new Polinomio("3x^4-6.5x^3+8.96x^2-15.25x-9.45");
+//        System.out.println("Expresion: " + p.getExpresion() + "\nreales:\n" + p.getRaices() + "\ncomplejas:\n" + p.getRaicesComplejas());
+//        Polinomio p2 = new Polinomio("-8.234x^3 -36.05x^2 +69.95x +19.56");
+//        System.out.println("Expresion: "+p2.getExpresion()+"\nreales:\n"+p2.getRaices() +"\ncomplejas:\n"+ p2.getRaicesComplejas());
+//        Polinomio p3 = new Polinomio("19.56-36.05x^2 -8.234x^3 +69.95x");
+//        System.out.println("Expresion: " + p3.getExpresion() + "\nreales:\n" + p3.getRaices() + "\ncomplejas:\n" + p3.getRaicesComplejas());
+//        Polinomio p4 = new Polinomio("3x^4-6.5x^3+8.96x^2+1");
+//        System.out.println("Expresion: " + p4.getExpresion() + "\nreales:\n" + p4.getRaices() + "\ncomplejas:\n" + p4.getRaicesComplejas());
+    }
     //-------------------------------------
-
 }
