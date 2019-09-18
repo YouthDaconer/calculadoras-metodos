@@ -44,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
         newton_raphson_btn = new javax.swing.JButton();
         secante_btn = new javax.swing.JButton();
         btn_raices_poli = new javax.swing.JButton();
+        integracion_rectangulos_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Métodos numéricos");
@@ -121,6 +122,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        integracion_rectangulos_btn.setText("Integración por Rectangulos");
+        integracion_rectangulos_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                integracion_rectangulos_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,9 +137,10 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(derivadas_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                        .addComponent(derivadas_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(conversor_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(newton_raphson_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(newton_raphson_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(integracion_rectangulos_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -177,7 +186,9 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(btn_raices_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newton_raphson_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(graficadora_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(graficadora_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(integracion_rectangulos_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -238,6 +249,11 @@ public class Menu extends javax.swing.JFrame {
         new PolinomioVista().setVisible(true);
     }//GEN-LAST:event_btn_raices_poliActionPerformed
 
+    private void integracion_rectangulos_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_integracion_rectangulos_btnActionPerformed
+        // TODO add your handling code here:
+        new IntegralVista().setVisible(true);
+    }//GEN-LAST:event_integracion_rectangulos_btnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,6 +297,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton estandar_btn;
     private javax.swing.JButton funciones_btn;
     private javax.swing.JButton graficadora_btn;
+    private javax.swing.JButton integracion_rectangulos_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton newton_raphson_btn;
     private javax.swing.JButton regla_falsa_btn;
