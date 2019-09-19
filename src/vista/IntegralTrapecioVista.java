@@ -15,7 +15,7 @@ import modelo.ModeloTabla;
  *
  * @author carlo
  */
-public class IntegralVista extends javax.swing.JFrame {
+public class IntegralTrapecioVista extends javax.swing.JFrame {
 
     String txt_field_int_inicial = "";
     String txt_field_int_final = "";
@@ -24,11 +24,9 @@ public class IntegralVista extends javax.swing.JFrame {
     /**
      * Creates new form ReglaFalsa
      */
-    public IntegralVista() {
+    public IntegralTrapecioVista() {
         initComponents();
-        txt_extr_izquierdo.setEditable(false);
-        txt_punto_medio.setEditable(false);
-        txt_extr_derecho.setEditable(false);
+        txt_resultado.setEditable(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -53,20 +51,16 @@ public class IntegralVista extends javax.swing.JFrame {
         num_particiones_txt = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        txt_extr_izquierdo = new javax.swing.JTextField();
+        txt_resultado = new javax.swing.JTextField();
         calcular_btn = new javax.swing.JButton();
         limpiar_btn = new javax.swing.JButton();
         cerrar_btn = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txt_punto_medio = new javax.swing.JTextField();
-        txt_extr_derecho = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Regla Falsa");
+        setTitle("Integración por Trapecio");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("INTEGRACIÓN MÉTODO RECTANGULOS");
+        jLabel1.setText("INTEGRACIÓN MÉTODO DEL TRAPECIO");
 
         jLabel2.setText("Función f(x):");
 
@@ -125,11 +119,11 @@ public class IntegralVista extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Extr. izquierdo:");
+        jLabel7.setText("Resultado:");
 
-        txt_extr_izquierdo.addActionListener(new java.awt.event.ActionListener() {
+        txt_resultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_extr_izquierdoActionPerformed(evt);
+                txt_resultadoActionPerformed(evt);
             }
         });
 
@@ -154,22 +148,6 @@ public class IntegralVista extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Punto medio:");
-
-        jLabel9.setText("Extr. derecho:");
-
-        txt_punto_medio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_punto_medioActionPerformed(evt);
-            }
-        });
-
-        txt_extr_derecho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_extr_derechoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,15 +156,9 @@ public class IntegralVista extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_punto_medio, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_extr_derecho, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_extr_izquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel7)
+                        .addGap(49, 49, 49)
+                        .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(calcular_btn)
                         .addGap(30, 30, 30)
@@ -206,7 +178,7 @@ public class IntegralVista extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel1)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,25 +204,17 @@ public class IntegralVista extends javax.swing.JFrame {
                     .addComponent(cerrar_btn))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_extr_izquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_punto_medio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_extr_derecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_extr_izquierdoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_extr_izquierdoActionPerformed
+    private void txt_resultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_resultadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_extr_izquierdoActionPerformed
+    }//GEN-LAST:event_txt_resultadoActionPerformed
 
     private void calcular_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcular_btnActionPerformed
         // TODO add your handling code here:
@@ -317,24 +281,11 @@ public class IntegralVista extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c)
                 || (c == KeyEvent.VK_BACK_SPACE)
-                || (c == KeyEvent.VK_DELETE)
-                || (c == KeyEvent.VK_MINUS))) {//que solo hacepte números, puntos, '-' y las teclas de borrado
-            getToolkit().beep();
-            evt.consume();//se elimina
-        }
-        if (c == KeyEvent.VK_MINUS && num_particiones_txt.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
+                || (c == KeyEvent.VK_DELETE))) {//que solo hacepte números, puntos, '-' y las teclas de borrado
             getToolkit().beep();
             evt.consume();//se elimina
         }
     }//GEN-LAST:event_num_particiones_txtKeyTyped
-
-    private void txt_punto_medioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_punto_medioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_punto_medioActionPerformed
-
-    private void txt_extr_derechoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_extr_derechoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_extr_derechoActionPerformed
 
     private void limpiar() {
         txt_field_int_final = "";
@@ -343,16 +294,12 @@ public class IntegralVista extends javax.swing.JFrame {
         int_inicial.setText("");
         int_final.setText("");
         num_particiones_txt.setText("");
-        txt_extr_izquierdo.setText("");
-        txt_punto_medio.setText("");
-        txt_extr_derecho.setText("");
+        txt_resultado.setText("");
         funcion_txt.requestFocus();
     }
 
     private void calcular() {
-        String resultado_extr_izquierdo = "NaN";
-        String resultado_punto_medio = "NaN";
-        String resultado_extr_derecho = "NaN";
+        String resultado = "NaN";
         try {
             String expresion = funcion_txt.getText();
             Double x1 = Double.parseDouble(int_inicial.getText());
@@ -360,27 +307,15 @@ public class IntegralVista extends javax.swing.JFrame {
             Integer num_particiones = Integer.parseInt(num_particiones_txt.getText());
 
             if (x1 >= x2 || num_particiones <= 0) {// En caso de algun en el intervalo 0 con el error tolerado
-                JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien y y que las particiones sean > 0", "Error :(", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien ingresado y que las particiones sean > 0", "Error :(", JOptionPane.ERROR_MESSAGE);
             } else {
                 integracion = new Integral(expresion, x1, x2, num_particiones);
-                resultado_extr_izquierdo = "" + integracion.rectanguloIzquierdo();//calculamos
-                resultado_punto_medio = "" + integracion.rectanguloCentral();//calculamos
-                resultado_extr_derecho = "" + integracion.rectanguloDerecho();//calculamos
+                resultado = "" + integracion.trapecio();//calculamos
 
-                if (resultado_extr_izquierdo.equals("NaN")) {//error
-                    JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión en el extremo izquierdo", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
+                if (resultado.equals("NaN")) {//error
+                    JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión ingresada", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
                 } else { //ponemos los resultados
-                    txt_extr_izquierdo.setText(resultado_extr_izquierdo);
-                }
-                if (resultado_punto_medio.equals("NaN")) {//error
-                    JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión en el punto medio", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
-                } else { //ponemos los resultados
-                    txt_punto_medio.setText(resultado_punto_medio);
-                }
-                if (resultado_extr_derecho.equals("NaN")) {//error
-                    JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión en el extremo derecho", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
-                } else { //ponemos los resultados
-                    txt_extr_derecho.setText(resultado_extr_derecho);
+                    txt_resultado.setText(resultado);
                 }
             }
         } catch (ArithmeticException e) {
@@ -402,14 +337,10 @@ public class IntegralVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton limpiar_btn;
     private javax.swing.JTextField num_particiones_txt;
-    private javax.swing.JTextField txt_extr_derecho;
-    private javax.swing.JTextField txt_extr_izquierdo;
-    private javax.swing.JTextField txt_punto_medio;
+    private javax.swing.JTextField txt_resultado;
     // End of variables declaration//GEN-END:variables
 }

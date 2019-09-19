@@ -25,46 +25,33 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="derivadas_btn" max="32767" attributes="0"/>
-                      <Component id="conversor_btn" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="newton_raphson_btn" min="-2" pref="198" max="-2" attributes="0"/>
-                  <Component id="integracion_rectangulos_btn" min="-2" pref="198" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="205" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btn_raices_poli" min="-2" pref="198" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="estandar_btn" max="32767" attributes="0"/>
-                              <Component id="funciones_btn" pref="198" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="graficadora_btn" alignment="1" min="-2" pref="198" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="biseccion_btn" pref="196" max="32767" attributes="0"/>
-                                  <Component id="regla_falsa_btn" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="secante_btn" min="-2" pref="198" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
+                  <Component id="integracion_rectangulos_btn" max="32767" attributes="0"/>
+                  <Component id="newton_raphson_btn" alignment="0" max="32767" attributes="0"/>
+                  <Component id="derivadas_btn" alignment="0" max="32767" attributes="0"/>
+                  <Component id="conversor_btn" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="integracion_trapecio_btn" max="32767" attributes="0"/>
+                  <Component id="btn_raices_poli" max="32767" attributes="0"/>
+                  <Component id="estandar_btn" alignment="0" max="32767" attributes="0"/>
+                  <Component id="funciones_btn" alignment="0" min="-2" pref="198" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="secante_btn" alignment="1" max="32767" attributes="0"/>
+                  <Component id="biseccion_btn" max="32767" attributes="0"/>
+                  <Component id="regla_falsa_btn" pref="167" max="32767" attributes="0"/>
+                  <Component id="graficadora_btn" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,32 +60,40 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="conversor_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                      <Component id="estandar_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="conversor_btn" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="derivadas_btn" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="newton_raphson_btn" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="integracion_rectangulos_btn" min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="biseccion_btn" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="estandar_btn" min="-2" pref="68" max="-2" attributes="0"/>
+                          <Component id="biseccion_btn" min="-2" pref="68" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="funciones_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                          <Component id="regla_falsa_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="secante_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                          <Component id="btn_raices_poli" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="graficadora_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                          <Component id="integracion_trapecio_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="derivadas_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="funciones_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="regla_falsa_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="secante_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="btn_raices_poli" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="newton_raphson_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="graficadora_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="integracion_rectangulos_btn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -198,6 +193,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="integracion_rectangulos_btnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="integracion_trapecio_btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Integraci&#xf3;n por Trapecio"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="integracion_trapecio_btnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
