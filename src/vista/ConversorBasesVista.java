@@ -37,24 +37,26 @@ public class ConversorBasesVista extends javax.swing.JFrame {
         keyListenerDecimal = new KeyListener() {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                printIt("Pressed", keyEvent);
+                
             }
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                borrarCampo(keyEvent);
+                
             }
 
             @Override
             public void keyTyped(KeyEvent keyEvent) {
+                printIt("Pressed", keyEvent);
+                borrarCampo(keyEvent);
             }
 
             private void borrarCampo(KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
+                char keyCode = keyEvent.getKeyChar();
                 String aux_field_decimal = "";
                 System.out.println("el enter:" + keyCode);
                 // Si solto .
-                if (keyCode == 46 || keyCode == 110) {
+                if (keyCode == KeyEvent.VK_PERIOD || keyCode == KeyEvent.VK_DECIMAL) {
                     int count = 0;
                     char c = '.';
                     for (int i = 0; i < txt_field_decimal.trim().length(); i++) {
@@ -79,13 +81,13 @@ public class ConversorBasesVista extends javax.swing.JFrame {
                     }
                 }
                 // Si solto -
-                if (keyCode == 45 || keyCode == 109) {
+                if (keyCode == KeyEvent.VK_MINUS || keyCode == KeyEvent.VK_SUBTRACT) {
                     if (txt_field_decimal.length() < 0) {
                         return;
                     }
                 }
                 // Si lo que digitó no es un número, no la tecla enter o no es la tecla retroceso
-                if (!(keyCode >= 48 && keyCode <= 57) && keyCode != 10 && keyCode != 8) {
+                if (!(keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9) && keyCode !=KeyEvent.VK_ENTER && keyCode !=KeyEvent.VK_BACK_SPACE) {
                     aux_field_decimal = num_decimal.getText();
                     aux_field_decimal = borrarUltimoCaracter(aux_field_decimal);
                     num_decimal.setText(aux_field_decimal);
@@ -100,15 +102,15 @@ public class ConversorBasesVista extends javax.swing.JFrame {
             }
 
             private void printIt(String title, KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
+                char keyCode = keyEvent.getKeyChar();
                 // Si presiona el signo negativo
-                if (keyCode == 45 || keyCode == 109) {
+                if (keyCode == KeyEvent.VK_MINUS || keyCode == KeyEvent.VK_SUBTRACT) {
                     if (txt_field_decimal.length() > 0) {
                         return;
                     }
                 }
                 // Si presiona retroceso y la variable tiene algo
-                if (keyCode == 8 && !txt_field_decimal.trim().equals("")) {
+                if (keyCode == KeyEvent.VK_BACK_SPACE && !txt_field_decimal.trim().equals("")) {
                     // Si la variable tiene tamaño 2 y contiene un negativo
                     if (txt_field_decimal.length() == 2 && txt_field_decimal.trim().contains("-")) {
                         limpiarCampos();
@@ -161,20 +163,22 @@ public class ConversorBasesVista extends javax.swing.JFrame {
         keyListenerBinario = new KeyListener() {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                printIt("Pressed", keyEvent);
+                
             }
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                borrarCampo(keyEvent);
+                
             }
 
             @Override
             public void keyTyped(KeyEvent keyEvent) {
+                printIt("Pressed", keyEvent);
+                borrarCampo(keyEvent);
             }
 
             private void borrarCampo(KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
+                char keyCode = keyEvent.getKeyChar();
                 String aux_field_binario = "";
                 // Si solto .
                 if (keyCode == 46 || keyCode == 110) {
@@ -223,7 +227,7 @@ public class ConversorBasesVista extends javax.swing.JFrame {
             }
 
             private void printIt(String title, KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
+                char keyCode = keyEvent.getKeyChar();
                 // Si presiona retroceso
                 if (keyCode == 8 && !txt_field_binario.trim().equals("")) {
                     // Si la variable tiene tamaño 2 y contiene un negativo
@@ -277,18 +281,20 @@ public class ConversorBasesVista extends javax.swing.JFrame {
         /* Eventos de conversión desde octal */
         keyListenerOctal = new KeyListener() {
             public void keyPressed(KeyEvent keyEvent) {
-                printIt("Pressed", keyEvent);
+                
             }
 
             public void keyReleased(KeyEvent keyEvent) {
-                borrarCampo(keyEvent);
+                
             }
 
             public void keyTyped(KeyEvent keyEvent) {
+                printIt("Pressed", keyEvent);
+                borrarCampo(keyEvent);
             }
 
             private void borrarCampo(KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
+                char keyCode = keyEvent.getKeyChar();
                 String aux_field_octal = "";
                 // Si solto .
                 if (keyCode == 46 || keyCode == 110) {
@@ -337,7 +343,7 @@ public class ConversorBasesVista extends javax.swing.JFrame {
             }
 
             private void printIt(String title, KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
+                char keyCode = keyEvent.getKeyChar();
                 // Si presiona el signo negativo
                 if (keyCode == 45 || keyCode == 109) {
                     if (txt_field_octal.length() > 0) {
@@ -396,20 +402,22 @@ public class ConversorBasesVista extends javax.swing.JFrame {
         keyListenerHexadecimal = new KeyListener() {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                printIt("Pressed", keyEvent);
+                
             }
 
             @Override
             public void keyReleased(KeyEvent keyEvent) {
-                borrarCampo(keyEvent);
+                
             }
 
             @Override
             public void keyTyped(KeyEvent keyEvent) {
+                printIt("Pressed", keyEvent);
+                borrarCampo(keyEvent);
             }
 
             private void borrarCampo(KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
+                char keyCode = keyEvent.getKeyChar();
                 String aux_field_hexadecimal = "";
                 // Si solto .
                 if (keyCode == 46 || keyCode == 110) {
@@ -459,15 +467,15 @@ public class ConversorBasesVista extends javax.swing.JFrame {
             }
 
             private void printIt(String title, KeyEvent keyEvent) {
-                int keyCode = keyEvent.getKeyCode();
+                char keyCode = keyEvent.getKeyChar();
                 // Si presiona el signo negativo
-                if (keyCode == 45 || keyCode == 109) {
+                if (keyCode == KeyEvent.VK_MINUS || keyCode == KeyEvent.VK_SUBTRACT) {
                     if (txt_field_hexadecimal.length() > 0) {
                         return;
                     }
                 }
                 // Si presiona retroceso y la variable tiene algo
-                if (keyCode == 8 && !txt_field_hexadecimal.trim().equals("")) {
+                if (keyCode == KeyEvent.VK_BACK_SPACE && !txt_field_hexadecimal.trim().equals("")) {
                     // Si la variable tiene tamaño 2 y contiene un negativo
                     if (txt_field_hexadecimal.length() == 2 && txt_field_hexadecimal.trim().contains("-")) {
                         limpiarCampos();
@@ -477,7 +485,7 @@ public class ConversorBasesVista extends javax.swing.JFrame {
                     System.out.println("como queda al borrar el ultimo: " + txt_field_hexadecimal);
                 }
                 // Si está digitando números o presiona retroceso (Excluyo los códigos de las letras desde el 58 hasta el 64)
-                if (keyCode == 45 || keyCode == 109 || (keyCode >= 48 && keyCode <= 70 && keyCode != 58 && keyCode != 59 && keyCode != 60 && keyCode != 61 && keyCode != 62 && keyCode != 63 && keyCode != 64) || keyCode == 8 || keyCode == 46 || keyCode == 110) {
+                if (keyCode == KeyEvent.VK_MINUS  || keyCode == KeyEvent.VK_SUBTRACT || (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_F && keyCode != 58 && keyCode != 59 && keyCode != 60 && keyCode != 61 && keyCode != 62 && keyCode != 63 && keyCode != 64) || keyCode == KeyEvent.VK_BACK_SPACE || keyCode ==KeyEvent.VK_PERIOD || keyCode ==KeyEvent.VK_DECIMAL) {
                     if (keyCode != 8) {
                         // Si digito un punto
                         if (keyCode == 46 || keyCode == 110) {
@@ -549,6 +557,7 @@ public class ConversorBasesVista extends javax.swing.JFrame {
         num_octal = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         num_hexadecimal = new javax.swing.JTextField();
+        btn_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Conversor de Bases");
@@ -566,12 +575,23 @@ public class ConversorBasesVista extends javax.swing.JFrame {
 
         num_hexadecimal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        btn_limpiar.setText("limpiar");
+        btn_limpiar.setToolTipText("limpia los campos");
+        btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 25, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -591,13 +611,13 @@ public class ConversorBasesVista extends javax.swing.JFrame {
                                 .addComponent(num_octal, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(78, 78, 78)
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(num_hexadecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 25, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_limpiar)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(num_hexadecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -621,14 +641,21 @@ public class ConversorBasesVista extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(num_hexadecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(btn_limpiar)
+                .addGap(26, 26, 26))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btn_limpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_limpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

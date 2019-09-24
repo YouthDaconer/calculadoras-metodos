@@ -66,14 +66,14 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Regla Falsa");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("MÉTODO DE REGLA FALSA");
 
         jLabel2.setText("Función f(x):");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Intervalo"));
 
-        jLabel3.setText("Desde (a)");
+        jLabel3.setText("Límite inferior:");
 
         int_inicial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -81,7 +81,7 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Hasta (b)");
+        jLabel4.setText("Límite superior:");
 
         int_final.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -118,7 +118,7 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel5.setText("Error de tolerancia (Et):");
+        jLabel5.setText("Error de tolerancia:");
 
         error_tolerancia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -262,7 +262,7 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
                     .addComponent(txt_iteraciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnTabla)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
