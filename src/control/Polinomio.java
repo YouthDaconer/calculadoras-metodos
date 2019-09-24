@@ -249,16 +249,16 @@ public class Polinomio {
 
     }
 
-    //Pruebas
-    public static void main(String[] args) throws Exception {
-//        Polinomio p = new Polinomio("3x^4-6.5x^3+8.96x^2-15.25x-9.45");
-//        System.out.println("Expresion: " + p.getExpresion() + "\nreales:\n" + p.getRaices() + "\ncomplejas:\n" + p.getRaicesComplejas());
-//        Polinomio p2 = new Polinomio("-8.234x^3 -36.05x^2 +69.95x +19.56");
-//        System.out.println("Expresion: "+p2.getExpresion()+"\nreales:\n"+p2.getRaices() +"\ncomplejas:\n"+ p2.getRaicesComplejas());
-//        Polinomio p3 = new Polinomio("19.56-36.05x^2 -8.234x^3 +69.95x");
-//        System.out.println("Expresion: " + p3.getExpresion() + "\nreales:\n" + p3.getRaices() + "\ncomplejas:\n" + p3.getRaicesComplejas());
-//        Polinomio p4 = new Polinomio("3x^4-6.5x^3+8.96x^2+1");
-//        System.out.println("Expresion: " + p4.getExpresion() + "\nreales:\n" + p4.getRaices() + "\ncomplejas:\n" + p4.getRaicesComplejas());
-    }
-    //-------------------------------------
+//    //Pruebas
+//    public static void main(String[] args) throws Exception {
+////        Polinomio p = new Polinomio("3x^4-6.5x^3+8.96x^2-15.25x-9.45");
+////        System.out.println("Expresion: " + p.getExpresion() + "\nreales:\n" + p.getRaices() + "\ncomplejas:\n" + p.getRaicesComplejas());
+////        Polinomio p2 = new Polinomio("-8.234x^3 -36.05x^2 +69.95x +19.56");
+////        System.out.println("Expresion: "+p2.getExpresion()+"\nreales:\n"+p2.getRaices() +"\ncomplejas:\n"+ p2.getRaicesComplejas());
+////        Polinomio p3 = new Polinomio("19.56-36.05x^2 -8.234x^3 +69.95x");
+////        System.out.println("Expresion: " + p3.getExpresion() + "\nreales:\n" + p3.getRaices() + "\ncomplejas:\n" + p3.getRaicesComplejas());
+////        Polinomio p4 = new Polinomio("3x^4-6.5x^3+8.96x^2+1");
+////        System.out.println("Expresion: " + p4.getExpresion() + "\nreales:\n" + p4.getRaices() + "\ncomplejas:\n" + p4.getRaicesComplejas());
+//    }
+//    //-------------------------------------
 }

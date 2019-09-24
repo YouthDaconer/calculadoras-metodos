@@ -37,9 +37,9 @@ public class Derivada {
     //----------------------------------
 
     /*
-    *método que calcula la derivada de la función en el punto x
-    *por medio del método de derivación numerica
-    **/
+     *método que calcula la derivada de la función en el punto x
+     *por medio del método de derivación numerica
+     **/
     public Double derivacionNumericaClasica(double x, int cifras) {
 
         Double resultado = Double.NaN;// no un valor numerico
@@ -54,9 +54,9 @@ public class Derivada {
     //---------------------------------------
 
     /*
-    *método que calcula la derivada central de la función en el punto x
-    *por medio del método de derivación numerica central
-    **/
+     *método que calcula la derivada central de la función en el punto x
+     *por medio del método de derivación numerica central
+     **/
     public Double derivacionNumericaCentral(double x, int cifras) {
 
         Double resultado = Double.NaN;// no un valor numerico
@@ -72,9 +72,9 @@ public class Derivada {
     //---------------------------------------
 
     /*
-    *método que calcula la derivada central de la función en el punto x
-    *por medio del método de derivación numerica central
-    **/
+     *método que calcula la derivada central de la función en el punto x
+     *por medio del método de derivación numerica central
+     **/
     public Double segundaDerivadaCentral(double x, int cifras) {
 
         Double resultado = Double.NaN;// no un valor numerico
@@ -89,12 +89,50 @@ public class Derivada {
     }
     //---------------------------------------
 
-//    //pruebas
+    /*
+     *método que calcula la derivada central de la función en el punto x
+     *por medio del método de derivación numerica central
+     **/
+    public Double terceraDerivadaCentral(double x, int cifras) {
+
+        Double resultado = Double.NaN;// no un valor numerico
+        h = 1e-3;
+        try {
+            resultado = ((f.f(x + 2 * h) - 2*f.f(x + h) + 2 * f.f(x - h) - f.f(x - 2 * h)) / (2 * Math.pow(h, 3)));//formula de derivación numérica
+            resultado = f.redondeo(Double.toString(resultado), cifras);//redondeo a 5 cifras
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException("No se pudo evaluar la derivada en el punto " + x);// en caso de que no se pueda hallar la derivada
+        }
+        return resultado;
+    }
+
+    //---------------------------------------
+    /*
+     *método que calcula la derivada central de la función en el punto x
+     *por medio del método de derivación numerica central
+     **/
+    public Double cuartaDerivadaCentral(double x, int cifras) {
+
+        Double resultado = Double.NaN;// no un valor numerico
+        h = 1e-2;
+        try {
+            resultado = (f.f(x + 2 * h) - (4 * f.f(x + h)) + 6 * f.f(x) - (4 * f.f(x - h)) + f.f(x - 2 * h)) / (Math.pow(h, 4));//formula de derivación numérica
+            resultado = f.redondeo(Double.toString(resultado), cifras);//redondeo a 5 cifras
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException("No se pudo evaluar la derivada en el punto " + x);// en caso de que no se pueda hallar la derivada
+        }
+        return resultado;
+    }
+    //---------------------------------------
+
+    //pruebas
 //    public static void main(String[] args) {
-//        Derivada d = new Derivada("tan(x)");// expresion
-//        System.out.println("resultado: " + d.derivacionNumericaClasica(1, 10));
-//        System.out.println("resultado: " + d.derivacionNumericaCentral(1, 10));
-//        System.out.println("resultado: " + d.segundaDerivadaCentral(1, 10));
+//        Derivada d = new Derivada("cos(x)+x^5");// expresion
+//        System.out.println("derivada clasica: " + d.derivacionNumericaClasica(Math.PI, 10));
+//        System.out.println("diferencia central: " + d.derivacionNumericaCentral(Math.PI, 10));
+//        System.out.println("segunda derivada: " + d.segundaDerivadaCentral(Math.PI, 10));
+//        System.out.println("tercera derivada: " + d.terceraDerivadaCentral(Math.PI, 10));
+//        System.out.println("cuarta derivada: " + d.cuartaDerivadaCentral(Math.PI, 10));
 //    }
-//    //-----------------------------------
+    //-----------------------------------
 }
