@@ -145,7 +145,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btn_limpiar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="limpiar"/>
+        <Property name="text" type="java.lang.String" value="Limpiar"/>
         <Property name="toolTipText" type="java.lang.String" value="limpia los campos"/>
       </Properties>
       <Events>

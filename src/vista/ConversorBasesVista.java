@@ -575,7 +575,7 @@ public class ConversorBasesVista extends javax.swing.JFrame {
 
         num_hexadecimal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btn_limpiar.setText("limpiar");
+        btn_limpiar.setText("Limpiar");
         btn_limpiar.setToolTipText("limpia los campos");
         btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
