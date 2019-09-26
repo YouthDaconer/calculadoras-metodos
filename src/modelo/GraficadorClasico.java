@@ -35,7 +35,7 @@ public class GraficadorClasico extends JPanel {
     JTextField campoIntervaloA, campoIntervaloB;
     JTextField campoNoPuntos;
     JTextField campoNumeroDeInteraciones;
-    JTextField campoDerivada;
+//    JTextField campoDerivada;
 
     JLabel Mensaje;
     JScrollPane scrollPane;
@@ -43,19 +43,19 @@ public class GraficadorClasico extends JPanel {
     DefaultListModel listModel;
 
     //BOTONES
-    JButton BtnAyuda;
+//    JButton BtnAyuda;
     JButton BtnGraficar;
-    JButton botonMetodo1;
-    JButton botonMetodo2;
-    JButton botonMetodo3;
-    JButton botonMetodo4;
+//    JButton botonMetodo1;
+//    JButton botonMetodo2;
+//    JButton botonMetodo3;
+//    JButton botonMetodo4;
     int puntosInt;
 
     //PANELES
     //JPanel panelEscalas; //Panel para las escalas
     JPanel panelGrafico; //Aqu� va la Zona grafica
     JPanel panelControles; //panel para botones y campos de texto,etc
-    JPanel panelBotones;//
+//    JPanel panelBotones;//
     JPanel DisplayPanel1 = new JPanel(); //Panel grande para la grafica
     JPanel DisplayPanel2 = new JPanel(); //panel grande para todos los controles
 
@@ -82,19 +82,19 @@ public class GraficadorClasico extends JPanel {
         imageIcon = new ImageIcon(getClass().getResource("background.jpg"));  //imagen de fondo
 
         //CREANDO BOTONES
-        BtnAyuda = new JButton("Ayuda");
+//        BtnAyuda = new JButton("Ayuda");
         BtnGraficar = new JButton("Graficar");
-        botonMetodo1 = new JButton("Biseccion");
-        botonMetodo2 = new JButton("Newton");
-        botonMetodo3 = new JButton("Secante");
-        botonMetodo4 = new JButton("Regula falsa");
+//        botonMetodo1 = new JButton("Biseccion");
+//        botonMetodo2 = new JButton("Newton");
+//        botonMetodo3 = new JButton("Secante");
+//        botonMetodo4 = new JButton("Regula falsa");
 
         campoIntervaloA = new JTextField("-2", 3);
         campoIntervaloB = new JTextField("", 3);
         campoNumeroDeInteraciones = new JTextField("3", 3);
         campoNoPuntos = new JTextField("99", 3);
         campoFuncion = new JTextField("(x+2)^2-1", 15);//x^3+2x^2+7x-20//cos(x)
-        campoDerivada = new JTextField("", 15);
+//        campoDerivada = new JTextField("xd", 15);
 
         Mensaje = new JLabel("", JLabel.LEFT);
 
@@ -112,17 +112,17 @@ public class GraficadorClasico extends JPanel {
         DisplayPanel1.setLayout(new BorderLayout());
         DisplayPanel1.add(scrollPane, BorderLayout.CENTER);//panelGrafico
 
-        panelBotones = new JPanel();
-        panelBotones.setLayout(new GridLayout(4, 1));
-        panelBotones.add(botonMetodo1);
-        panelBotones.add(botonMetodo2);
-        panelBotones.add(botonMetodo3);
-        panelBotones.add(botonMetodo4);
+//        panelBotones = new JPanel();
+//        panelBotones.setLayout(new GridLayout(4, 1));
+//        panelBotones.add(botonMetodo1);
+//        panelBotones.add(botonMetodo2);
+//        panelBotones.add(botonMetodo3);
+//        panelBotones.add(botonMetodo4);
 
         panelControles.setLayout(new GridLayout(4, 2));
         panelControles.add(campoFuncion);
         panelControles.add(BtnGraficar);
-        panelControles.add(BtnAyuda);
+//        panelControles.add(BtnAyuda);
         panelControles.add(Mensaje);
 
         JPanel miniPanelintervalos = new JPanel();//mini panel para intervalos a y b
@@ -144,9 +144,9 @@ public class GraficadorClasico extends JPanel {
         miniPanelInteraciones.add(campoNumeroDeInteraciones);
         panelControles.add(miniPanelInteraciones);
 
-        JPanel miniPanelNumPuntos = new JPanel();
-        miniPanelNumPuntos.add(campoDerivada);
-        panelControles.add(miniPanelNumPuntos);
+//        JPanel miniPanelNumPuntos = new JPanel();
+//        miniPanelNumPuntos.add(campoDerivada);
+//        panelControles.add(miniPanelNumPuntos);
 
         //BORDES
         Border colorline = BorderFactory.createLineBorder(new Color(220, 220, 220));
@@ -156,7 +156,7 @@ public class GraficadorClasico extends JPanel {
         rotulo = BorderFactory.createTitledBorder(" M�todos ");
         rotulo.setTitleFont(ft10);
         rotulo.setTitleColor(new Color(0, 0, 128));
-        panelBotones.setBorder(rotulo);
+//        panelBotones.setBorder(rotulo);
 
         rotulo = BorderFactory.createTitledBorder(" Funcion ");
         rotulo.setTitleColor(new Color(0, 0, 128));
@@ -168,7 +168,7 @@ public class GraficadorClasico extends JPanel {
 
         DisplayPanel2.setLayout(new BorderLayout(1, 1));
         DisplayPanel2.add("Center", panelControles);
-        DisplayPanel2.add("West", panelBotones);
+//        DisplayPanel2.add("West", panelBotones);
 
         Contenedor.setLayout(new BorderLayout());
         Contenedor.add("North", DisplayPanel1);
@@ -211,28 +211,28 @@ public class GraficadorClasico extends JPanel {
         ManejadorDeEvento ManejadorDevt = new ManejadorDeEvento();
         campoFuncion.addActionListener(ManejadorDevt);
         BtnGraficar.addActionListener(ManejadorDevt);
-        BtnAyuda.addActionListener(ManejadorDevt);
+//        BtnAyuda.addActionListener(ManejadorDevt);
         campoIntervaloA.addActionListener(ManejadorDevt);
         campoIntervaloB.addActionListener(ManejadorDevt);
         campoNoPuntos.addActionListener(ManejadorDevt);
 
-        botonMetodo1.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                listModel.clear();
-                Biseccion animacion1 = new Biseccion();
-                animacion1.start();
-                panelGrafico.repaint();
-            }
-        });
-
-        botonMetodo2.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                listModel.clear();
-                Newton animacion2 = new Newton();
-                animacion2.start();
-                panelGrafico.repaint();
-            }
-        });
+//        botonMetodo1.addMouseListener(new MouseAdapter() {
+//            public void mouseClicked(MouseEvent e) {
+//                listModel.clear();
+//                Biseccion animacion1 = new Biseccion();
+//                animacion1.start();
+//                panelGrafico.repaint();
+//            }
+//        });
+//
+//        botonMetodo2.addMouseListener(new MouseAdapter() {
+//            public void mouseClicked(MouseEvent e) {
+//                listModel.clear();
+//                Newton animacion2 = new Newton();
+//                animacion2.start();
+//                panelGrafico.repaint();
+//            }
+//        });
 
         fFrame = new AyudaJFrame(this);
     }//
@@ -247,9 +247,9 @@ public class GraficadorClasico extends JPanel {
                 panelGrafico.repaint();
             }
 
-            if (source == BtnAyuda) {
-                fFrame.setVisible(true);
-            }//
+//            if (source == BtnAyuda) {
+//                fFrame.setVisible(true);
+//            }//
         }
     }//
 
@@ -415,7 +415,7 @@ public class GraficadorClasico extends JPanel {
             String derivada = "";
 
             if (!errorEnExpresion) {
-                Mensaje.setText("m�todos num�ricos");//:. Arrastre el mouse para mover ejes.");
+                Mensaje.setText("Gráficadora de Funciones");//:. Arrastre el mouse para mover ejes.");
                 campoFuncion.setForeground(Color.black);
 
                 //CICLO QUE PINTA LA FUNCI�N

@@ -73,7 +73,7 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Intervalo"));
 
-        jLabel3.setText("Límite inferior:");
+        jLabel3.setText("Desde (a):");
 
         int_inicial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -81,7 +81,7 @@ public class ReglaFalsaVista extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Límite superior:");
+        jLabel4.setText("Hasta (b):");
 
         int_final.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
