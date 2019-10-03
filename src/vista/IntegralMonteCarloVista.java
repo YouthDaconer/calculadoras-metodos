@@ -317,7 +317,7 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien ingresado y que las particiones sean > 0", "Error :(", JOptionPane.ERROR_MESSAGE);
             } else {
                 integracion = new Integral(expresion, x1, x2, num_particiones);
-                resultado = "" + integracion.monteCarlo();//calculamos
+                resultado = "" + integracion.monteCarlo(num_particiones);//calculamos
 
                 if (resultado.equals("NaN")) {//error
                     JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión ingresada", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error

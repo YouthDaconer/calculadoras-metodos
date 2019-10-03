@@ -22,6 +22,7 @@ public class Integral {
     private Double m;//punto medio
     private Double error;//error calculado
     private Double random;//valor que guardará un x aleatorio perteneciente [a,b]
+    private int puntos;// Número de puntos (Montecarlo)
 
     //Constructores
     public Integral(Funcion f, Double a, Double b, int n) {
@@ -51,7 +52,20 @@ public class Integral {
         this.cambiaSigno = f.f(a) * f.f(b) < 0;
     }
 
+    public Integral(String expresion, Double a, Double b) {
+        this.f = new Funcion(expresion);
+        this.a = a;
+        this.b = b;
+        this.n = 10000;
+        this.m = (a + b) / 2;
+        this.delta = Math.abs(b - a) / n;
+        this.error = 0.0;
+        this.random = getRandom();
+        basesXi();
+        this.cambiaSigno = f.f(a) * f.f(b) < 0;
+    }
     //----------------------------------
+
     //Inicializa las bases
     private void basesXi() {
         xi = new Double[n + 1];
@@ -126,6 +140,14 @@ public class Integral {
 
     public Double getError() {
         return error;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
     }
 
     //---------------------------------------
@@ -280,15 +302,23 @@ public class Integral {
     }
     //--------------------------------------
 
-    //Método montecarlo
-    public Double monteCarlo() {
+    /**
+     * Método montecarlo
+     *
+     *
+     * @param puntos de prueba
+     * @return el resultado aproximado de la integral desde (a,b) por montecarlo
+     */
+    public Double monteCarlo(int puntos) {
         Double resultado = Double.NaN;
+
         try {
 
             int N = 0;
             double max = getMax();
             double xRandom;
             double yRandom;
+            this.puntos = puntos;
 
             for (int i = 0; i < n; i++) {
                 xRandom = getRandom();
@@ -297,7 +327,7 @@ public class Integral {
                     N++;
                 }
             }
-            resultado = (b - a) * max * ((double) N / (double) n);
+            resultado = (b - a) * max * ((double) N / (double) puntos);
 
         } catch (ArithmeticException e) {
             throw new ArithmeticException("No se pudo evaluar en un punto del intervalo :(\n" + e.getMessage());
@@ -308,25 +338,25 @@ public class Integral {
 
 //    //Pruebas
 //    public static void main(String[] args) {
-//        Integral i = new Integral("(sin(sqrt(x)+5) * e^sqrt(x)) / sqrt(x)", Math.PI, Math.PI + 2, 10000);
+//        Integral i = new Integral("(sin(sqrt(x)+5) * e^sqrt(x)) / sqrt(x)", Math.PI, Math.PI + 2, 1000);
 //        if (i.cambiaDeSigno()) {
 //            System.out.println("Existen cambios de signo para la integral de f(x)=" + i.getFuncion()
 //                    + "Desde " + i.getA() + " Hasta " + i.getB());
 //
 //        }
 //        System.out.println("Los resultadoss de la integral de f(x)=" + i.getFuncion()
-//                    + " Desde " + i.getA() + " Hasta " + i.getB() + " son:");
-//            System.out.println("Con " + i.getN() + " rectángulos:");
-//            System.out.println("Izquierdo: " + i.rectanguloIzquierdo());
-//            System.out.println("Central: " + i.rectanguloCentral());
-//            System.out.println("Derecho: " + i.rectanguloDerecho());
-//            System.out.println("\nCon " + i.getN() + " trapecios:");
-//            System.out.println("Trapecio: " + i.trapecio() + " +-  el Error: " + i.getError());
-//            System.out.println("\nCon " + i.getN() + " puntos:");
-//            System.out.println("Montecarlo: " + i.monteCarlo());
-//            System.out.println("\nRegla Simpson con " + i.getN() + " particiones:");
-//            System.out.println("Simpson 1/3: " + i.simpson13() + " +-  el Error: " + i.getError());
-//            System.out.println("Simpson 3/8: " + i.simpson38() + " +-  el Error: " + i.getError());
+//                + " Desde " + i.getA() + " Hasta " + i.getB() + " son:");
+//        System.out.println("Con " + i.getN() + " rectángulos:");
+//        System.out.println("Izquierdo: " + i.rectanguloIzquierdo());
+//        System.out.println("Central: " + i.rectanguloCentral());
+//        System.out.println("Derecho: " + i.rectanguloDerecho());
+//        System.out.println("\nCon " + i.getN() + " trapecios:");
+//        System.out.println("Trapecio: " + i.trapecio() + " +-  el Error: " + i.getError());
+//
+//        System.out.println("\nMontecarlo: " + i.monteCarlo(1000) + " con " + i.getPuntos() + " puntos");
+//        System.out.println("\nRegla Simpson con " + i.getN() + " particiones:");
+//        System.out.println("Simpson 1/3: " + i.simpson13() + " +-  el Error: " + i.getError());
+//        System.out.println("Simpson 3/8: " + i.simpson38() + " +-  el Error: " + i.getError());
 //    }
 //    //------------------------
 }
