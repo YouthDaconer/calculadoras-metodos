@@ -16,7 +16,7 @@ import modelo.ModeloTabla;
  * @author carlo
  */
 public class IntegralMonteCarloVista extends javax.swing.JFrame {
-
+    
     String txt_field_int_inicial = "";
     String txt_field_int_final = "";
     Integral integracion;
@@ -111,7 +111,7 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel5.setText("Número de particiones:");
+        jLabel5.setText("Número de puntos:");
 
         num_particiones_txt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -157,28 +157,35 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addGap(49, 49, 49)
-                        .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(calcular_btn)
-                        .addGap(30, 30, 30)
-                        .addComponent(limpiar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(cerrar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(calcular_btn)
+                                .addGap(30, 30, 30)
+                                .addComponent(limpiar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(cerrar_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)))
+                        .addGap(21, 21, 21))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(13, 13, 13)
+                        .addComponent(num_particiones_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(13, 13, 13)
-                            .addComponent(num_particiones_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addGap(18, 18, 18)
-                            .addComponent(funcion_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 21, Short.MAX_VALUE))
+                            .addComponent(funcion_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,11 +198,11 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
                     .addComponent(funcion_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(num_particiones_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -246,7 +253,7 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();//se elimina
         }
-
+        
         if (c == KeyEvent.VK_MINUS && int_inicial.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
             getToolkit().beep();
             evt.consume();//se elimina
@@ -269,7 +276,7 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();//se elimina
         }
-
+        
         if (c == KeyEvent.VK_MINUS && int_final.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
             getToolkit().beep();
             evt.consume();//se elimina
@@ -286,7 +293,7 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
             evt.consume();//se elimina
         }
     }//GEN-LAST:event_num_particiones_txtKeyTyped
-
+    
     private void limpiar() {
         txt_field_int_final = "";
         txt_field_int_inicial = "";
@@ -297,7 +304,7 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
         txt_resultado.setText("");
         funcion_txt.requestFocus();
     }
-
+    
     private void calcular() {
         String resultado = "NaN";
         try {
@@ -305,7 +312,7 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
             Double x1 = Double.parseDouble(int_inicial.getText());
             Double x2 = Double.parseDouble(int_final.getText());
             Integer num_particiones = Integer.parseInt(num_particiones_txt.getText());
-
+            
             if (x1 >= x2 || num_particiones <= 0) {// En caso de algun en el intervalo 0 con el error tolerado
                 JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien ingresado y que las particiones sean > 0", "Error :(", JOptionPane.ERROR_MESSAGE);
             } else {

@@ -16,7 +16,7 @@ import modelo.ModeloTabla;
  * @author carlo
  */
 public class IntegralSimpson38Vista extends javax.swing.JFrame {
-
+    
     String txt_field_int_inicial = "";
     String txt_field_int_final = "";
     Integral integracion;
@@ -27,6 +27,7 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
     public IntegralSimpson38Vista() {
         initComponents();
         txt_resultado.setEditable(false);
+        txt_error.setEditable(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -55,6 +56,8 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
         calcular_btn = new javax.swing.JButton();
         limpiar_btn = new javax.swing.JButton();
         cerrar_btn = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txt_error = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Integración por Trapecio");
@@ -148,6 +151,14 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Error calculado:");
+
+        txt_error.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_errorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,10 +166,6 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(49, 49, 49)
-                        .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(calcular_btn)
                         .addGap(30, 30, 30)
@@ -178,8 +185,16 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel1)))
-                .addGap(0, 21, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_resultado)
+                            .addComponent(txt_error))))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +222,11 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_resultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_error, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -247,7 +266,7 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();//se elimina
         }
-
+        
         if (c == KeyEvent.VK_MINUS && int_inicial.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
             getToolkit().beep();
             evt.consume();//se elimina
@@ -270,7 +289,7 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();//se elimina
         }
-
+        
         if (c == KeyEvent.VK_MINUS && int_final.getText().contains("-")) {//Si la caja de texto ya contiene un '-'
             getToolkit().beep();
             evt.consume();//se elimina
@@ -288,6 +307,10 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_num_particiones_txtKeyTyped
 
+    private void txt_errorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_errorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_errorActionPerformed
+    
     private void limpiar() {
         txt_field_int_final = "";
         txt_field_int_inicial = "";
@@ -296,9 +319,10 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
         int_final.setText("");
         num_particiones_txt.setText("");
         txt_resultado.setText("");
+        txt_error.setText("");
         funcion_txt.requestFocus();
     }
-
+    
     private void calcular() {
         String resultado = "NaN";
         try {
@@ -306,7 +330,7 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
             Double x1 = Double.parseDouble(int_inicial.getText());
             Double x2 = Double.parseDouble(int_final.getText());
             Integer num_particiones = Integer.parseInt(num_particiones_txt.getText());
-
+            
             if (x1 >= x2 || num_particiones <= 0) {// En caso de algun en el intervalo 0 con el error tolerado
                 JOptionPane.showMessageDialog(this, "Asegúrate de que el intervalo esté bien ingresado y que las particiones sean > 0", "Error :(", JOptionPane.ERROR_MESSAGE);
             } else {
@@ -317,6 +341,7 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "No se pudo calcular la expresión ingresada", "Error :(", JOptionPane.ERROR_MESSAGE);// En caso de algun error
                 } else { //ponemos los resultados
                     txt_resultado.setText(resultado);
+                    txt_error.setText(String.valueOf(integracion.getError()));
                 }
             }
         } catch (ArithmeticException e) {
@@ -338,10 +363,12 @@ public class IntegralSimpson38Vista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton limpiar_btn;
     private javax.swing.JTextField num_particiones_txt;
+    private javax.swing.JTextField txt_error;
     private javax.swing.JTextField txt_resultado;
     // End of variables declaration//GEN-END:variables
 }
