@@ -60,7 +60,7 @@ public class IntegralSimpson13Vista extends javax.swing.JFrame {
         txt_error = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Integración por Trapecio");
+        setTitle("Integración por Simpson 1/3");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("INTEGRACIÓN MÉTODO SIMPSON 1/3");

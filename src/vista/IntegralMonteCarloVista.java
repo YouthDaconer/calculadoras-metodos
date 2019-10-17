@@ -57,7 +57,7 @@ public class IntegralMonteCarloVista extends javax.swing.JFrame {
         cerrar_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Integración por Trapecio");
+        setTitle("Integración por Monte Carlo");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("INTEGRACIÓN MÉTODO MONTE CARLO");
