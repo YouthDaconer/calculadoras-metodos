@@ -27,7 +27,17 @@ public class ModeloTabla {
     //----------------------------
 
     /**
-     * 
+     * constructor
+     *
+     */
+    public ModeloTabla() {
+        this.encabezados = null;
+        this.datos = new ArrayList<>();
+    }
+    //----------------------------
+
+    /**
+     *
      * @return modelo de tabla
      */
     public DefaultTableModel getModeloTabla() {
@@ -37,6 +47,28 @@ public class ModeloTabla {
             dt.addRow(fila);//adiciono la fila
         });
         return dt;
+    }
+    //---------------------------------------
+
+    /**
+     *
+     * @param n la cantidad de columnas incluyendo la columna de los términos
+     * solución
+     * @return modelo de tabla de la matriz aumentada
+     */
+    public DefaultTableModel getModeloMatrizAumentada(int n) {
+        if (n > 0) {
+            encabezados = new Object[n];
+            //pongo los encabezados
+            for (int i = 0; i < n - 1; i++) {
+                encabezados[i] = "X" + i;
+            }
+            encabezados[n - 1] = "d";//columna solución           
+            return new DefaultTableModel(encabezados, n);
+
+        }else{
+            return null;
+        }
     }
     //---------------------------------------
 }
