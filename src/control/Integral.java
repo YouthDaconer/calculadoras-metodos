@@ -320,7 +320,7 @@ public class Integral {
             double yRandom;
             this.puntos = puntos;
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < puntos; i++) {
                 xRandom = getRandom();
                 yRandom = max * Math.random();
                 if (yRandom <= f.f(xRandom)) {
