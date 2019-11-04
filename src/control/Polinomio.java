@@ -68,8 +68,9 @@ public class Polinomio {
      */
     private void leerPolinomio() {
         String polynomial = expresion;
-        polynomial = polynomial.replace("-", "+-");//para poder separar los terminos depues con '+'
+        polynomial = polynomial.replace("-", "+-");//para poder separar los terminos depues con '+'           
         String[] terminos = polynomial.split("\\+");//los terminos los separo con el '+'
+        
         for (String termino : terminos) {//recorro cada termino
             Termino t = new Termino();//Creo un objeto tipo Termino
             if (!termino.equals("")) {
@@ -147,24 +148,30 @@ public class Polinomio {
         Collections.sort(lista);//Ordenamos el polinomio de mayor a menor 
     }
     //-------------------------------------------
+    
+    
 
     /**
      * Arregla la expresión en cadena
      *
      */
-    private void arreglaExpresion() {
+    public void arreglaExpresion() {
         expresion = "";
         lista.forEach((termino) -> {//Re escribo el polinomio ordenado
             if (Math.abs(termino.getCoeficiente()) == 1 && termino.getExponente() == 1) {
-                expresion += "x +";
+                if (termino.getCoeficiente() < 0 ) {
+                    expresion += "-x +";
+                }else{
+                    expresion += "x +";
+                }                
             } else {
-                if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() > 1) {
+                if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() > 1) {
                     expresion += termino.getCoeficiente() + "x^" + termino.getExponente() + " +";
                 } else {
-                    if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() == 0) {
+                    if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() == 0) {
                         expresion += termino.getCoeficiente();
                     } else {
-                        if (Math.abs(termino.getCoeficiente()) > 1 && termino.getExponente() == 1) {
+                        if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() == 1) {
                             expresion += termino.getCoeficiente() + "x +";
                         }
                     }
@@ -181,7 +188,7 @@ public class Polinomio {
      * @param cadena aquitarle espacios
      * @return cadena sin espacios
      */
-    private String quitaEspacios(String cadena) {
+    public static String quitaEspacios(String cadena) {
         String unspacedString = "";	//Variable donde lee la función
         for (int i = 0; i < cadena.length(); i++) {	//Le quita los espacios a la espresión que leyó
             //Si el caracter no es un espacio lo pone, sino lo quita.
@@ -192,62 +199,42 @@ public class Polinomio {
         return unspacedString;
     }
     //------------------------------------
-
+    
     /**
-     * Clase encargada de la comparación de terminos del polinomio
+     * Arregla la expresión en cadena
      *
-     * @author JSRA
-     *
+     * @param lista
+     * @return 
      */
-    private class Termino implements Comparable<Termino> {
-
-        private Object coeficiente, exponente;
-
-        //Constructores
-        public Termino() {
-            this.coeficiente = "0";
-            this.exponente = 0;
-        }
-
-        public Termino(Object exponente) {
-            this.coeficiente = "0";
-            this.exponente = exponente;
-        }
-
-        public Termino(Object coeficiente, Object exponente) {
-            this.coeficiente = coeficiente;
-            this.exponente = exponente;
-        }
-        //----------------------------------------
-
-        public double getCoeficiente() {
-            return Double.parseDouble(coeficiente.toString());
-        }
-
-        public void setCoeficiente(Object coeficiente) {
-            this.coeficiente = coeficiente;
-        }
-
-        public int getExponente() throws NumberFormatException {
-            return Integer.parseInt(exponente.toString());
-        }
-
-        public void setExponente(Object exponente) {
-            this.exponente = exponente;
-        }
-
-        @Override
-        public int compareTo(Termino t) {
-            if (t.getExponente() < getExponente()) {
-                return -1;
-            } else if (t.getExponente() < getExponente()) {
-                return 0;
+    public static String construirExpresion(ArrayList<Termino> lista) {
+        String expr = "";
+        lista.sort(null);
+        for (Termino termino : lista) {//Re escribo el polinomio ordenado
+            if (Math.abs(termino.getCoeficiente()) == 1 && termino.getExponente() == 1) {
+                if (termino.getCoeficiente() < 0 ) {
+                    expr += "-x +";
+                }else{
+                    expr += "x +";
+                }                
             } else {
-                return 1;
+                if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() > 1) {
+                    expr += termino.getCoeficiente() + "x^" + termino.getExponente() + " +";
+                } else {
+                    if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() == 0) {
+                        expr += termino.getCoeficiente();
+                    } else {
+                        if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() == 1) {
+                            expr += termino.getCoeficiente() + "x +";
+                        }
+                    }
+                }
             }
-        }
-
+        }        
+        return quitaEspacios(expr.replace("+-", "-"));//quito espacios y reemplazo(+-)
     }
+    //-------------------------------------------
+
+    
 
 //    //Pruebas
 //    public static void main(String[] args) throws Exception {

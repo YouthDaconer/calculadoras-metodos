@@ -645,7 +645,7 @@ public class Funcion {
     //--------------------------------------------
 
     //Método que redondea una cadena double 
-    public Double redondeo(String resultado, int redondeo) {
+    public static Double redondeo(String resultado, int redondeo) {
         Double num = Double.parseDouble(resultado);
         try {
             BigDecimal bd = new BigDecimal(resultado);
