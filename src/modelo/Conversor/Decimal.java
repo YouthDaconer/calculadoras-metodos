@@ -1,5 +1,7 @@
 package modelo.Conversor;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author salas
@@ -8,7 +10,7 @@ public class Decimal {
 
     //Dominio de caracteres={0,1,2,3,4,5,6,7,8,9}
     //Atributos
-    private int entero;
+    private long entero;
     private double fraccion;
     private final String[] letras = {"A", "B", "C", "D", "E", "F"};
     private final String digitos = "0123456789ABCDEF";
@@ -31,14 +33,15 @@ public class Decimal {
         String cadena = "";
         if (!numero.trim().equals("")) {
             if (base != 10) {// si es la base actual, no necesita cambio
-                if (esFraccion(numero)) {// si es fracción procedemos a separar la parte entera de la fraccionaria
+                
+                if (esFraccion(numero)) {// si es fracción procedemos a separar la parte entera de la fraccionaria                    
                     Double n = Double.parseDouble(numero);
-                    entero = n.intValue();
+                    entero = n.longValue();
                     fraccion = (n - entero);
-                    cadena = Integer.toString(entero, base) + '.' + fraccion(fraccion, base, presicion);
+                    cadena = Long.toString(entero, base) + '.' + fraccion(fraccion, base, presicion);
                 } else {
-                    entero = Integer.parseInt(numero);
-                    cadena = Integer.toString(entero, base);
+                    entero = Long.parseLong(numero);
+                    cadena = Long.toString(entero, base);
                 }
                 if (base > 10) {
                     cadena = cadena.toUpperCase();//Para los números con base > 10
@@ -79,6 +82,7 @@ public class Decimal {
     }
     //--------------------------------------
 
+
     //de una base pasada por parametro a base decimal
     public String aDecimal(String numero, int baseOrigen) {
 
@@ -87,7 +91,7 @@ public class Decimal {
 
             numero = numero.toUpperCase();
             if (!esFraccion(numero)) {
-                cadena = "" + leerEntero(numero, baseOrigen);
+                cadena = leerEntero(numero, baseOrigen);
             } else {
                 cadena = "" + leerFraccion(numero, baseOrigen);
             }
@@ -100,41 +104,38 @@ public class Decimal {
     //--------------------------------------
 
     //para leer solo numeros enteros
-    private int leerEntero(String numero, int baseOrigen) {
-        int decimal = 0;
-        for (int i = 0; i < numero.length(); i++) {
-            char c = numero.charAt(i);
-            int d = digitos.indexOf(c);
+    private String leerEntero(String numero, int baseOrigen) {
+        long decimal = 0;
+        int pos = numero.length();
+        int d = 0;
+        for (char dig : numero.toCharArray()) {
+            d = digitos.indexOf(dig);
             decimal = decimal * baseOrigen + d;
         }
-        return decimal;
+        return decimal + "";
     }
     //---------------------------------------
 
     //para leer numeros fraccionados
-    private double leerFraccion(String numero, int baseOrigen) {
-        double decimal = 0;
-        int i = 0;
+    private String leerFraccion(String numero, int baseOrigen) {                
         int exponente = 1;
-        char c;
-        do {
-            c = numero.charAt(i);
-            if (c == '.') {
-                double fraccion = 0.0;
-                for (int j = i + 1; j < numero.length(); j++) {
-                    int d = digitos.indexOf(numero.charAt(j));
-                    fraccion += d / (Math.pow(baseOrigen, exponente));
-                    exponente++;
-                }
-                decimal += fraccion;
-            } else {
-                int d = digitos.indexOf(c);
-                decimal = decimal * baseOrigen + d;
-            }
-            i++;
-        } while (c != '.' && i < numero.length());
+        String[] partes = numero.split("\\.");
+        String parteEntera = leerEntero(partes[0], baseOrigen);
+        String parteFraccionaria;
+        BigDecimal dec = new BigDecimal("0.0");
+        BigDecimal dec2;
+        
+        for (int j = 0; j < partes[1].length(); j++) {
+            int d = digitos.indexOf(partes[1].charAt(j));
+            dec2 = new BigDecimal(d*Math.pow(baseOrigen, -exponente));
+            dec = dec.add(dec2);
+                     
+            exponente++;
+        }        
+        parteFraccionaria = dec.toString();
+        parteFraccionaria=parteFraccionaria.replace("0.", ".");
+        return parteEntera+parteFraccionaria;
 
-        return decimal;
     }
     //-----------------------------------------
 
@@ -144,14 +145,14 @@ public class Decimal {
 ////        for (int i = 2; i <= 16; i++) {
 ////            System.out.println("873 en base " + i + " es:" + num.cambiarABase("873", i, 100));
 ////        }
-////        for (int i = 2; i <= 16; i++) {
-////            System.out.println("799.5765  en base " + i + " es:" + num.cambiarABase("799.5765 ", i, 100));
-////        }
+//        for (int i = 2; i <= 16; i++) {
+//            System.out.println("7937623827639.57653753376276732  en base " + i + " es:" + num.cambiarABase("7937623827639.57653753376276732", i, 100));
+//        }
 //        //System.out.println("799.5765  en base " + 2+ " es:" + num.cambiarABase("799.5765 ", 2, 100));
 //        //System.out.println("799.5765  en base " + 8 + " es:" + num.cambiarABase("799.5765 ", 8, 100));
-//        System.out.println("799.5765  en base " + 16 + " es:" + num.cambiarABase("799.5765 ", 16, 100));
-//
+//        //System.out.println("799.5765  en base " + 16 + " es:" + num.cambiarABase("799.5765 ", 16, 100));
+////
 ////        System.out.println("73BC5f a decimal es: " + num.aDecimal("73BC5f", 16));
-////        System.out.println("73BC5f.3 a decimal es: " + num.aDecimal("73BC5f.3", 16));
+////        System.out.println("73BC5f.3 a decimal es: " + num.aDecimal("73BC5f.FFFFF", 16));
 //    }
 }
