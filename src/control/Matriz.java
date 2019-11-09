@@ -11,7 +11,7 @@ public class Matriz {
 
     //Atributos de clase
     private Double[][] matriz;
-    private Double[][] inversa;
+    private Double[][] inversa;    
     private Double[] soluciones;//Necesario para el método GaussJordan
     private String proceso;
     //---------------------------
@@ -113,7 +113,6 @@ public class Matriz {
     public Double[][] getMatizInversa() {
         return inversa;
     }
-    
 
     public Double[][] getMatrizIdentidad() {
         Double[][] m = new Double[this.matriz.length][this.matriz[0].length];
@@ -151,6 +150,7 @@ public class Matriz {
                 for (int j = 0; j < n; j++) {
                     m[i][j] = m[i][j] / p; // operamos la fila
                     inv[i][j] = inv[i][j] / p;
+
                 }
                 sol[i] = sol[i] / p; // operamos la solución de la fila
 
@@ -170,7 +170,7 @@ public class Matriz {
                         proceso += " - (" + c + ") * fila" + (i + 1) + " + fila" + (x + 1 + "\n");
                         for (int y = 0; y < n; y++) {
                             m[x][y] = m[x][y] - c * m[i][y];//operamos la fila
-                            inv[x][y] =inv[x][y] -c *inv[i][y];
+                            inv[x][y] = inv[x][y] - c * inv[i][y];                            
                         }
                         sol[x] = sol[x] - c * sol[i]; // operamos la solución de la fila
 
@@ -188,7 +188,7 @@ public class Matriz {
                     throw new ArithmeticException(getMensajeGauss(ceroEnDiagonal()));
                 }
             }
-            inversa= inv;
+            inversa = inv;
             return sol;
         } else {
             throw new ArithmeticException("Verifica que la matriz esté escrita correctamente :(\n");
@@ -344,49 +344,54 @@ public class Matriz {
         }
         return transpuesta;
     }
+    
+    
     //----------------------------------------------------------
 
-//    //pruebas
-//    public static void main(String[] args) {
-//        //matriz 3x3:
-//        Double[][] m1 = {{0.0, 0.0, 5.0}, {5.0, 0.0, 1.2}, {1.3, 2.0, 0.0}};
-//        Double sol1[] = {2.5, 3.2, 4.1};
-//
-//        //matriz 2x2:
-//        Double[][] m2 = {{2.0, 1.0}, {5.0, 3.0}};
-//        Double sol2[] = {4.0, 1.0};
-//
-//        //matriz 2x2 sin solución:
-//        Double[][] m3 = {{3.0, 1.0}, {3.0, 1.0}};
-//        Double so3[] = {9.0, -7.0};
-//        
-//
-//        //matriz 2x2 con infinitas soluciones:
-//        Double[][] m4 = {{-6.0, 4.0}, {3.0, -2.0}};
-//        Double sol4[] = {2.0, -1.0};
-//        
-//        //matriz 2x2 para ensayar la matriz inversa:
-//        Double[][] m5 = {{1.0, 3.0}, {2.0, 4.0}};        
-//        Matriz matriz = new Matriz(m5);
-//        
-//        Double[][] m6 = {{1.0,2.0,-3.0},{4.0,0.0,-2.0}};
-//        Double[][] m7 = {{3.0,1.0},{2.0,4.0},{-1.0,5.0}};
-//        //matriz.setSoluciones(sol1);
-//
-//        System.out.println("operaciones:");
-//        System.out.println("suma:\n" + Arrays.deepToString(m2) + " + " + Arrays.deepToString(m3) + " = " + Arrays.deepToString(sumar(m2, m3)));
-//        System.out.println("resta:\n" + Arrays.deepToString(m2) + " - " + Arrays.deepToString(m3) + " = " + Arrays.deepToString(restar(m2, m3)));
-//        System.out.println("producto escalar:\n" + Arrays.deepToString(m1) + " * " + 5 + " = " + Arrays.deepToString(productoEscalar(m1, 5.0)));
-//        System.out.println("multiplicación:\n" + Arrays.deepToString(m6) + " * " + Arrays.deepToString(m7) + " = " + Arrays.deepToString(productoPunto(m6, m7)));
-//        System.out.println("transpuesta:\n" + Arrays.deepToString(m1) + " = " + Arrays.deepToString(transpuesta(m1)));
-//        
-//        System.out.println("\nPruebas de Gauss Jordan para la matriz:\n" + Arrays.deepToString(matriz.getMatriz()));
-//        System.out.println("columna extendida:\n" + Arrays.toString(matriz.getSoluciones()));
-//        System.out.println("RESPUESTAS:\n" + Arrays.toString(matriz.metodoGaussJordan()));
-//        Double [][]inv =matriz.getMatizInversa();        
-//        System.out.println("Matriz inversa:"+Arrays.deepToString(inv));
-//        //System.out.println("Proceso:\n" + matriz.getProceso());
-//
-//    }
-//    //----------------------------------
+    //pruebas
+    public static void main(String[] args) {
+        //matriz 3x3:
+        Double[][] m1 = {{0.0, 0.0, 5.0}, {5.0, 0.0, 1.2}, {1.3, 2.0, 0.0}};
+        Double sol1[] = {2.5, 3.2, 4.1};
+
+        //matriz 2x2:
+        Double[][] m2 = {{2.0, 1.0}, {5.0, 3.0}};
+        Double sol2[] = {4.0, 1.0};
+
+        //matriz 2x2 sin solución:
+        Double[][] m3 = {{3.0, 1.0}, {3.0, 1.0}};
+        Double so3[] = {9.0, -7.0};
+
+        //matriz 2x2 con infinitas soluciones:
+        Double[][] m4 = {{-6.0, 4.0}, {3.0, -2.0}};
+        Double sol4[] = {2.0, -1.0};
+
+        //matriz 4x4 para ensayar la matriz inversa:
+        Double[][] m5 = {
+            {2.0, 1.0, -1.0, 2.0},
+            {4.0, 5.0, -3.0, 6.0},
+            {-2.0, 5.0, -2.0, 6.0},
+            {4.0, 11.0, -4.0, 8.0}};
+        Matriz matriz = new Matriz(m5);
+
+        Double[][] m6 = {{1.0, 2.0, -3.0}, {4.0, 0.0, -2.0}};
+        Double[][] m7 = {{3.0, 1.0}, {2.0, 4.0}, {-1.0, 5.0}};
+        //matriz.setSoluciones(sol1);
+
+        System.out.println("operaciones:");
+        System.out.println("suma:\n" + Arrays.deepToString(m2) + " + " + Arrays.deepToString(m3) + " = " + Arrays.deepToString(sumar(m2, m3)));
+        System.out.println("resta:\n" + Arrays.deepToString(m2) + " - " + Arrays.deepToString(m3) + " = " + Arrays.deepToString(restar(m2, m3)));
+        System.out.println("producto escalar:\n" + Arrays.deepToString(m1) + " * " + 5 + " = " + Arrays.deepToString(productoEscalar(m1, 5.0)));
+        System.out.println("multiplicación:\n" + Arrays.deepToString(m6) + " * " + Arrays.deepToString(m7) + " = " + Arrays.deepToString(productoPunto(m6, m7)));
+        System.out.println("transpuesta:\n" + Arrays.deepToString(m1) + " = " + Arrays.deepToString(transpuesta(m1)));
+
+        System.out.println("\nPruebas de Gauss Jordan para la matriz:\n" + Arrays.deepToString(matriz.getMatriz()));
+        System.out.println("columna extendida:\n" + Arrays.toString(matriz.getSoluciones()));
+        System.out.println("RESPUESTAS:\n" + Arrays.toString(matriz.metodoGaussJordan()));
+        Double[][] inv = matriz.getMatizInversa();
+        System.out.println("Matriz inversa:" + Arrays.deepToString(inv));
+        System.out.println("Proceso:\n" + matriz.getProceso());
+
+    }
+    //----------------------------------
 }
