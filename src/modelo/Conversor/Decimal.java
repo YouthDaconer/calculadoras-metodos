@@ -37,7 +37,7 @@ public class Decimal {
                 if (esFraccion(numero)) {// si es fracción procedemos a separar la parte entera de la fraccionaria                    
                     Double n = Double.parseDouble(numero);
                     entero = n.longValue();
-                    fraccion = (n - entero);
+                    fraccion = Math.abs(n - entero);
                     cadena = Long.toString(entero, base) + '.' + fraccion(fraccion, base, presicion);
                 } else {
                     entero = Long.parseLong(numero);
@@ -108,11 +108,17 @@ public class Decimal {
         long decimal = 0;
         int pos = numero.length();
         int d = 0;
+        String menos="";
         for (char dig : numero.toCharArray()) {
-            d = digitos.indexOf(dig);
-            decimal = decimal * baseOrigen + d;
+            if (dig!='-') {
+                d = digitos.indexOf(dig);
+                decimal = decimal * baseOrigen + d;
+            }else{
+                menos=dig+"";
+            }
+            
         }
-        return decimal + "";
+        return menos+decimal + "";
     }
     //---------------------------------------
 
@@ -145,14 +151,20 @@ public class Decimal {
 ////        for (int i = 2; i <= 16; i++) {
 ////            System.out.println("873 en base " + i + " es:" + num.cambiarABase("873", i, 100));
 ////        }
-//        for (int i = 2; i <= 16; i++) {
-//            System.out.println("7937623827639.57653753376276732  en base " + i + " es:" + num.cambiarABase("7937623827639.57653753376276732", i, 100));
-//        }
-//        //System.out.println("799.5765  en base " + 2+ " es:" + num.cambiarABase("799.5765 ", 2, 100));
-//        //System.out.println("799.5765  en base " + 8 + " es:" + num.cambiarABase("799.5765 ", 8, 100));
-//        //System.out.println("799.5765  en base " + 16 + " es:" + num.cambiarABase("799.5765 ", 16, 100));
-////
-////        System.out.println("73BC5f a decimal es: " + num.aDecimal("73BC5f", 16));
-////        System.out.println("73BC5f.3 a decimal es: " + num.aDecimal("73BC5f.FFFFF", 16));
+////        for (int i = 2; i <= 16; i++) {
+////            System.out.println("7937623827639.57653753376276732  en base " + i + " es:" + num.cambiarABase("7937623827639.57653753376276732", i, 100));
+////        }
+//        System.out.println("799.5765  en base " + 2+ " es:" + num.cambiarABase("799.5765 ", 2, 100));
+//        System.out.println("799.5765  en base " + 8 + " es:" + num.cambiarABase("799.5765 ", 8, 100));
+//        System.out.println("799.5765  en base " + 16 + " es:" + num.cambiarABase("799.5765 ", 16, 100));
+//        
+//        System.out.println("-799.5765  en base " + 2+ " es:" + num.cambiarABase("-799.5765 ", 2, 100));
+//        System.out.println("-799.5765  en base " + 8 + " es:" + num.cambiarABase("-799.5765 ", 8, 100));
+//        System.out.println("-799.5765  en base " + 16 + " es:" + num.cambiarABase("-799.5765 ", 16, 100));
+//
+//        System.out.println("73BC5f a decimal es: " + num.aDecimal("73BC5f", 16));
+//        System.out.println("73BC5f.3 a decimal es: " + num.aDecimal("73BC5f.3", 16));
+//        System.out.println("-73BC5f a decimal es: " + num.aDecimal("-73BC5f", 16));
+//        System.out.println("-73BC5f.3 a decimal es: " + num.aDecimal("-73BC5f.3", 16));
 //    }
 }
