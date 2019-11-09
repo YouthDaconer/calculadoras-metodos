@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo.Conversor;
 
 /**
  *
- * @author salas
+ * @author JSRA
  */
 public class IEEE754 {
 
     private String cadenaBinaria;
     private String signo;
-
     private int exp32, exp64;
     private char[] binario, mantisa32, mantisa64;
 
@@ -25,13 +19,12 @@ public class IEEE754 {
         } else {
             signo = "0";
         }
-        inicializarMantizas();
         normalizar(this.cadenaBinaria);
     }
 
     public IEEE754() {
         this.cadenaBinaria = "";
-        inicializarMantizas();
+        inicializarMantizas(cadenaBinaria);
     }
 
     public String getSigno() {
@@ -72,6 +65,7 @@ public class IEEE754 {
         if (!bin.contains(".")) {
             bin = bin + ".0";
         }
+        inicializarMantizas(bin);
 
         for (int i = 0; i < bin.length(); i++) {
             binario[i] = bin.charAt(i);
@@ -83,21 +77,34 @@ public class IEEE754 {
         exp32 = exp + 127;
         exp64 = exp + 1023;
         boolean normalizado = false;
-
+        int i = indicePrimer1 + 1;
         int j = 0;
-        for (int i = indicePrimer1 + 1; i < mantisa32.length; i++) {
-            if (binario[i] != '.') {
+
+        while (!normalizado && i< binario.length ) {
+            if (binario[i] != '.' && j < mantisa32.length) {
                 mantisa32[j] = binario[i];
                 j++;
             }
+            if (i >= binario.length || j > mantisa32.length) {
+                normalizado = true;
+            }
+            i++;
         }
+
+        i = indicePrimer1 + 1;
         j = 0;
-        for (int i = indicePrimer1 + 1; i < mantisa64.length; i++) {
-            if (binario[i] != '.') {
+        normalizado= false;
+        while (!normalizado && i< binario.length) {
+            if (binario[i] != '.' && j < mantisa64.length) {
                 mantisa64[j] = binario[i];
                 j++;
             }
+            if (i >= binario.length || j > mantisa64.length) {
+                normalizado = true;
+            }
+            i++;
         }
+        
     }
 
     public String exponente32() {
@@ -145,8 +152,13 @@ public class IEEE754 {
         return -1;
     }
 
-    private void inicializarMantizas() {
-        binario = new char[100];
+    private void inicializarMantizas(String bin) {
+        if (bin == "") {
+            binario = new char[1000];
+        } else {
+            binario = new char[bin.length()];
+        }
+
         mantisa32 = new char[23];
         mantisa64 = new char[52];
         for (int i = 0; i < binario.length; i++) {
@@ -161,17 +173,17 @@ public class IEEE754 {
 
     }
 
-    public String getNumeroDecimal( String exponente, String mantisa) {
+    public String getNumeroDecimal(String exponente, String mantisa) {
         Decimal d = new Decimal();
-        return d.aDecimal(getBinario( exponente, mantisa), 2);
+        return d.aDecimal(getBinario(exponente, mantisa), 2);
     }
 
-    public String getBinario( String exponente, String mantisa) {
+    public String getBinario(String exponente, String mantisa) {
         Decimal d = new Decimal();
         StringBuilder cadenaBin = new StringBuilder();
 
         int exp = 0;
-        
+
         if (exponente.length() == 8) {
             exp = Integer.parseInt(d.aDecimal(exponente, 2));
             exp -= 127;
@@ -190,7 +202,7 @@ public class IEEE754 {
             }
         }
 
-        for (int i = 0; i < mantisa.length(); i++) {            
+        for (int i = 0; i < mantisa.length(); i++) {
             if (i == exp) {
                 cadenaBin.append('.');
             }
@@ -200,5 +212,17 @@ public class IEEE754 {
         return cadenaBin.toString();
     }
 
-    
+//    public static void main(String[] args) {
+//        Decimal d = new Decimal();
+//
+//        IEEE754 i = new IEEE754(d.cambiarABase("-6755399441055744", 2, 100));
+//        System.out.println(i.cadenaBinaria);
+//        System.out.println(i.exponente32() + "-" + i.getMantisa32());
+//        System.out.println(i.exponente64() + "-" + i.getMantisa64());
+//        System.out.println("Decimal: "+i.getNumeroDecimal(i.exponente32(), i.getMantisa32()));
+//        System.out.println("binario: " +i.getBinario(i.exponente32(), i.getMantisa32()));
+//        
+//
+//    }
+
 }
