@@ -1,5 +1,8 @@
 package control;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -209,6 +212,8 @@ public class Polinomio {
     public static String construirExpresion(ArrayList<Termino> lista) {
         String expr = "";
         lista.sort(null);
+        BigDecimal bd;
+        String coef;
         for (Termino termino : lista) {//Re escribo el polinomio ordenado
             if (Math.abs(termino.getCoeficiente()) == 1 && termino.getExponente() == 1) {
                 if (termino.getCoeficiente() < 0 ) {
@@ -217,14 +222,18 @@ public class Polinomio {
                     expr += "x +";
                 }                
             } else {
-                if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() > 1) {
-                    expr += termino.getCoeficiente() + "x^" + termino.getExponente() + " +";
+                bd = new BigDecimal(termino.getCoeficiente());
+                bd= bd.setScale(10, BigDecimal.ROUND_HALF_UP);
+                coef =bd.toPlainString();
+                if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() > 1) {    
+                    
+                    expr += coef + "x^" + termino.getExponente() + " +";
                 } else {
                     if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() == 0) {
-                        expr += termino.getCoeficiente();
+                        expr += coef;
                     } else {
                         if (Math.abs(termino.getCoeficiente()) > 0 && termino.getExponente() == 1) {
-                            expr += termino.getCoeficiente() + "x +";
+                            expr += coef + "x +";
                         }
                     }
                 }

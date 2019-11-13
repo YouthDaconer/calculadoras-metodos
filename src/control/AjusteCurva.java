@@ -135,34 +135,22 @@ public class AjusteCurva {
 
     //Pruebas
     public static void main(String[] args) throws Exception {
-        Double[] xi = generarDoubles(10);
-        Double[] yi = new Double[xi.length];
-
-        Funcion f = new Funcion("20x^6+7x^5+8x^4+24x^3+5x^2+5x+2");//prueba con valores exactos
-        System.out.println("Función de prueba: " + f.getFuncion());
-        for (int i = 0; i < yi.length; i++) {
-            yi[i] = f.f(xi[i]);            
-        }
+//        Double[] xi = {1.13,1.15,1.25,1.07,1.19,1.18};
+//        Double[] yi = {2.75,3.02,3.15,3.3,2.95,3.29};
+        
+        Double[] xi ={10.0,12.0,9.0,27.0,47.0,112.0,36.0,241.0,59.0,167.0};
+        Double[] yi ={9.0,14.0,7.0,29.0,45.0,109.0,40.0,238.0,60.0,170.0};
+        
         System.out.println("X[i]:"+ Arrays.toString(xi));
         System.out.println("Y[i]:"+ Arrays.toString(yi));
         AjusteCurva aj = new AjusteCurva(xi, yi);
         System.out.println("Empezando ajustes...");
         for (int i = 1; i <= 6; i++) {
-            aj.ajustePolinomico(i, 4);
+            aj.ajustePolinomico(i, 11);
             System.out.println("\nPolinomio ajustado a grado " + i + ":");
             System.out.println(aj.getPolinomio() + "\nR^2= " + aj.coeficienteCorrelacion());
         }        
     }
 
-    public static Double[] generarDoubles(int n) {
-        ArrayList<Double> gen = new ArrayList<>();
-        for (int i = 1; i <= n; i++) {
-            gen.add(Double.valueOf(i));
-        }
-        gen.sort(null);
-        Double[] otro = new Double[n];
-        gen.toArray(otro);
-        return otro;
-    }
 
 }
